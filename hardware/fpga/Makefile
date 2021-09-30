@@ -5,10 +5,7 @@ DEFINE_TCLS := \
     vivado_ips/define_defines_includes_no_simset.tcl \
     vivado_ips/define_sources.tcl
 
-ifeq ($(VIVADO),)
 VIVADO := vitis-2019.2 vivado
-endif
-
 VIVADO_OPT :=-mode batch
 
 .PHONY: all
