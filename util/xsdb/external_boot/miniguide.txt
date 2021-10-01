@@ -1,0 +1,104 @@
+Build di petalinux
+cp Image system.dtb /opt/tftpboot/gbellocchi/
+tar -xf rootfs.tar.gz -C /opt/rootfs/gbellocchi/
+
+1. Reset della board
+xsdb 
+source ./reset-31212.tcl (deve esserci anche il pmufw.elf nella stessa dir)
+
+Se ci sono problemi con xsdb, prova a vedere ps e alla peggio fare kill -9 <PROCESS>
+
+2A. Boot di petalinux con bitstream (da Ritchie)
+Vai dentro /petalinux/zcu102 ed esegui:
+petalinux-boot --jtag --u-boot --fpga --bitstream <POSIZIONE-BITSREAM> -v --hw_server-url 127.0.0.1:31212
+
+2B. Boot di petalinux con bitstream (da Kernighan)
+Vai dentro /petalinux/zcu102 ed esegui:
+petalinux-boot --jtag --u-boot --fpga --bitstream <POSIZIONE-BITSREAM> -v --hw_server-url 155.185.4.26:31212
+
+If you get an error that says you don't have PETALINUX set, then just source this script that is located in
+the Petalinux installation folder: 
+source /var/pkg/ritchie/Xilinx/petalinux/2017.2/settings.sh 
+(refer to https://forums.xilinx.com/t5/Embedded-Linux/Error-when-trying-to-use-petalinux-create/td-p/862151)
+
+3. Accedere alla Zynq
+Vai su Ritchie via SSH ed esegui:
+minicom usb<PORTA-USB>
+La porta può cambiare di volta in volta.
+
+4. Lancia la board
+Copia e lancia uno alla volta i comandi “my-u-boot-cmd.txt” su minicom.
+
+setenv tftpblocksize 512
+
+(hero)
+setenv bootargs console=ttyPS0,115200n8 earlycon clk_ignore_unused cpuidle.off=1 ip=155.185.4.7:155.185.4.26:155.185.5.254:255.255.254.0::eth0:off root=/dev/nfs rootfstype=nfs nfsroot=155.185.4.26:/opt/hero/rootfs,tcp,nolock,nfsvers=3 rw
+(xilinx_deployment)
+setenv bootargs console=ttyPS0,115200n8 earlycon clk_ignore_unused cpuidle.off=1 ip=155.185.4.7:155.185.4.26:155.185.5.254:255.255.254.0::eth0:off root=/dev/nfs rootfstype=nfs nfsroot=155.185.4.26:/opt/rootfs/gbellocchi,tcp,nolock,nfsvers=3 rw uio_pdrv_genirq.of_id=generic-uio cma=256M
+
+Carica il kernel di Linux all’indirizzo 0x200000:
+tftpb 0x200000 gbellocchi/Image
+
+Carica il device tree all’indirizzo 0x7000000:
+tftpb 0x7000000 gbellocchi/system.dtb
+
+Fai il boot col kernel di Linux all’indirizzo 0x200000 con gli argomenti successivi
+booti 0x200000 - 0x7000000 ${bootargs}
+
+Togli e rimetti i driver di PULP:
+rmmod -f pulp
+insmod /mnt/lib/modules/4.9.0/extra/pulp.ko
+
+oppure da openmp-examples/common:
+make -f default.mk init-target-host
+
+ZYNQMP login/password
+USER: root
+PW: *no password*
+
+SSH su ritchie
+IP ritchie: 155.185.4.26
+Nickname: wks-marongiu1.mat.unibo.it
+ssh wks-marongiu1.mat.unimo.it
+
+SSH su kernighan
+IP kernighan: 155.185.4.27
+Nickname: wks-marongiu2.mat.unimore.it
+ssh wks-marongiu2.mat.unimo.it
+
+Copia con SSH
+Per copiare file/cartelle con ssh:
+scp <-r> <file/dir> gbellocchi@<macchina su cui copiare>:<percorso diverso da HOME>
+
+###############################
+# Workstation Gianluca Brilli #
+###############################
+
+- ZCU102 board ports: 4001 / 4002
+
+- Connessione server ssh
+ssh hipert-pc
+ssh -N -L 4002:192.168.0.109:4002 hipert-pc -v
+scp *FILE* gbellocchi@hipert-pc:/home/gbellocchi/workspace_pulp/hero/
+
+- Xilinx
+source /tools/Xilinx/Vivado/2018.3/settings64.sh
+source /tools/Petalinux/2019.2/settings.sh
+
+- xsdb
+connect -host localhost -port 4001 
+targets
+
+- Seriale boards
+minicom -D /srv/boards/ZCU102_1/serial0
+minicom -D /dev/ttyUSB0
+
+- Connessione con UI
+pw: pr0gramm1ng
+
+- NFS
+/mnt/nfs_share/gbellocchi
+
+- TFTPBOOT
+/var/lib/tftpboot/gbellocchi
+

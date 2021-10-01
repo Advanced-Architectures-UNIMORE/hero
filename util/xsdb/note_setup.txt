@@ -1,0 +1,41 @@
+Kernighan -> 172.19.0.6
+
+/var/srv/kernighan/rootfs/gbellocchi
+/var/srv/kernighan/tftpboot/gbellocchi
+
+HW_SERVER 155.185.4.27 port 31210 (ZCU102)
+HW_SERVER 155.185.4.27 port 31211 (ZCU102_NEW)
+
+PT_NFSROOT_DIR="/var/srv/kernighan/rootfs/acapotondi"
+PT_TFTPBOOT_DIR="/var/srv/kernighan/tftpboot/acapotondi"
+
+
+- PDU (Smart switch) -
+http://172.19.254.252/
+
+id: admin 
+pw: admin
+
+
+- Boot -
+run gbellocchi_boot
+
+setenv gatewayip
+setenv serverip
+
+dhcp
+
+-- Set environment variable at first --
+setenv gbellocchi_bootargs "console=ttyPS0,115200n8 earlycon clk_ignore_unused cpuidle.off=1 ip=dhcp root=/dev/nfs rootfstype=nfs nfsroot=172.19.0.6:/storage/srv/rootfs/gbellocchi,tcp,nolock,nfsvers=3 rw"
+-- Then run this to boot --
+dhcp; tftpb 0x200000 gbellocchi/Image; tftpb 0x7000000 gbellocchi/system.dtb; setenv bootargs ${gbellocchi_bootargs}; booti 0x200000 - 0x7000000
+-- FIXME: insert it under 'gbellocchi_boot' -
+
+setenv tftpblocksize 512
+tftpb 0x200000 gbellocchi/Image
+tftpb 0x7000000 gbellocchi/system.dtb
+booti 0x200000 - 0x7000000 ${bootargs}
+
+insmod /mnt/lib/modules/4.19.0/extra/pulp.ko
+
+
