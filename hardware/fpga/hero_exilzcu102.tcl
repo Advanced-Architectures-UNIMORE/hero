@@ -142,11 +142,12 @@ eval [exec sed {s/current_fileset/get_filesets hero_exilzcu102_i_pulp_0/} \
   vivado_ips/define_defines_includes_no_simset.tcl]
 
 # Include debug settings.
-add_files -fileset constrs_1 ./hero_exilzcu102_debug.xdc
-set_property target_constrs_file ./hero_exilzcu102_debug.xdc [current_fileset -constrset]
+# add_files -fileset constrs_1 ./hero_exilzcu102_debug.xdc
+# set_property target_constrs_file ./hero_exilzcu102_debug.xdc [current_fileset -constrset]
 
 # Synthesize
 foreach run [list synth_1 hero_exilzcu102_i_pulp_0_synth_1] {
+  # set_property strategy Flow_PerfOptimized_high [get_runs $run]
   set_property strategy Flow_AlternateRoutability [get_runs $run]
   set_property STEPS.SYNTH_DESIGN.ARGS.RETIMING true [get_runs $run]
 }
@@ -173,3 +174,10 @@ wait_on_run impl_1
 # Export Hardware Definition file.
 file mkdir ./hero_exilzcu102/hero_exilzcu102.sdk
 write_hwdef -force  -file ./hero_exilzcu102/hero_exilzcu102.sdk/hero_exilzcu102_wrapper.hdf
+
+# Export bitstream file.
+file copy -force ./hero_exilzcu102/hero_exilzcu102.runs/impl_1/hero_exilzcu102_wrapper.bit ./hero_exilzcu102/hero_exilzcu102.sdk/hero_exilzcu102_wrapper.bit
+
+# Export Xilinx Support Archive (XSA) file.
+write_hw_platform -fixed -force  -include_bit -file ./hero_exilzcu102/hero_exilzcu102_wrapper.xsa
+
