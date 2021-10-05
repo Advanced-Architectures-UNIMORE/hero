@@ -39,6 +39,7 @@ endpackage
 
 `include "axi/assign.svh"
 `include "axi/typedef.svh"
+`include "include/pulp_defines.svh"
 
 module pulp import pulp_pkg::*; #(
   // SoC Parameters
@@ -169,6 +170,7 @@ module pulp import pulp_pkg::*; #(
     .AXI_ID_WIDTH   (AXI_IW_SB_OUP),
     .AXI_USER_WIDTH (AXI_UW)
   ) l2_mst[L2_N_AXI_PORTS-1:0]();
+  
   AXI_BUS #(
     .AXI_ADDR_WIDTH (AXI_AW),
     .AXI_DATA_WIDTH (AXI_DW),
@@ -445,6 +447,8 @@ module pulp import pulp_pkg::*; #(
   );
 
   for (genvar i = 0; i < L2_N_AXI_PORTS; i++) begin: gen_l2_ports
+  
+  `ifdef L2_ATOMIC_PRESENT              
     axi_riscv_atomics_wrap #(
       .AXI_ADDR_WIDTH     (AXI_AW),
       .AXI_DATA_WIDTH     (AXI_DW),
@@ -471,6 +475,23 @@ module pulp import pulp_pkg::*; #(
       .rst_ni,
       .slv    (l2_mst_wo_atomics[i])
     );
+  `else
+    l2_mem #(
+      .AXI_AW     (AXI_AW),
+      .AXI_DW     (AXI_DW),
+      .AXI_UW     (AXI_UW),
+      .AXI_IW     (AXI_IW_SB_OUP),
+      .N_BYTES    (L2_SIZE/L2_N_AXI_PORTS)
+    ) i_l2_mem (
+      .clk_i,
+      .rst_ni,
+      .slv    (l2_mst[i])
+    );
+  `endif
+      
+
+      
+    
   end
 
   localparam axi_pkg::xbar_cfg_t TlbCfgXbarCfg = '{

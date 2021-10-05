@@ -1,3 +1,4 @@
+
 onerror {resume}
 quietly virtual signal -install {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/decoder_i} { /pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/decoder_i/instr_rdata_i[24:20]} rs2
 quietly virtual signal -install {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/decoder_i} { /pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/decoder_i/instr_rdata_i[19:15]} rs1
@@ -7,18 +8,249 @@ quietly virtual signal -install {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i
 quietly virtual signal -install {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i} { /pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_rdata_i[19:15]} rs1
 quietly virtual signal -install {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i} { /pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_rdata_i[24:20]} rs2
 quietly WaveActivateNextPane {} 0
-add wave -noupdate -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/wdata}
-add wave -noupdate -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/add}
-add wave -noupdate -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/req}
-add wave -noupdate -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/wen}
-add wave -noupdate -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/be}
-add wave -noupdate -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/rdata}
-add wave -noupdate -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/add}
-add wave -noupdate -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/wdata}
-add wave -noupdate -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/req}
-add wave -noupdate -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/wen}
-add wave -noupdate -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/be}
-add wave -noupdate -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/rdata}
+add wave -noupdate -group {HWPE_wrapper[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/clk}
+add wave -noupdate -group {HWPE_wrapper[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/rst_n}
+add wave -noupdate -group {HWPE_wrapper[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/test_mode}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/req}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/add}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/wen}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/wdata}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/be}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/gnt}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/r_opc}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/r_rdata}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[0]/r_valid}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/req}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/add}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/wen}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/wdata}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/be}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/gnt}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/r_opc}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/r_rdata}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[1]/r_valid}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/req}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/add}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/wen}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/wdata}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/be}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/gnt}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/r_opc}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/r_rdata}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwpe_xbar_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_xbar_master[2]/r_valid}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/req}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/add}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/wen}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/wdata}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/be}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/gnt}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/id}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/r_valid}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/r_opc}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/r_id}
+add wave -noupdate -group {HWPE_wrapper[0]} -group {hwacc_cfg_slave} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/hwacc_cfg_slave/r_rdata}
+add wave -noupdate -group {HWPE_wrapper[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/evt_o}
+add wave -noupdate -group {HWPE_wrapper[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/busy_o}
+add wave -noupdate -group {HWPE_top[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/clk_i}
+add wave -noupdate -group {HWPE_top[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/rst_ni}
+add wave -noupdate -group {HWPE_top[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/test_mode_i}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_add}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_be}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_data}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_gnt}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_wen}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_req}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_r_data}
+add wave -noupdate -group {HWPE_top[0]} -group {tcdm} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/tcdm_r_valid}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_add}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_be}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_data}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_gnt}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_wen}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_req}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_id}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_r_data}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_r_valid}
+add wave -noupdate -group {HWPE_top[0]} -group {periph} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/periph_r_id}
+add wave -noupdate -group {HWPE_top[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/evt_o}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {global} -label {clk_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/clk_i}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {global} -label {rst_ni} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/rst_ni}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {global} -label {test_mode_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/test_mode_i}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Input data} -group {in1} -label {Valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/a_i/valid}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Input data} -group {in1} -label {Data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/a_i/data}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Input data} -group {in1} -label {Ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/a_i/ready}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Input data} -group {in2} -label {Valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/b_i/valid}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Input data} -group {in2} -label {Data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/b_i/data}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Input data} -group {in2} -label {Ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/b_i/ready}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Output data} -group {out_r} -label {Valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/c_o/valid}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Output data} -group {out_r} -label {Data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/c_o/data}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {Output data} -group {out_r} -label {Ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/c_o/ready}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {control} -label {ctrl_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/ctrl_i}
+add wave -noupdate -group {HWPE_MMUL_PARALLEL_engine[0]} -group {flags} -label {flags_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/flags_o}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {global} -label {clk_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/ap_clk}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {global} -label {rst_ni} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/ap_rst_n}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {control} -label {start} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/start}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {control} -label {done} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/done}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {control} -label {idle} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/idle}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {control} -label {ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/ready}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {control} -label {cnt_out} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/cnt_out}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Input data} -label {in1 valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/in1_TVALID}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Input data} -label {in1 data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/in1_TDATA}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Input data} -label {in1 ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/in1_TREADY}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Input data} -label {in2 valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/in2_TVALID}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Input data} -label {in2 data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/in2_TDATA}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Input data} -label {in2 ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/in2_TREADY}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Output data} -label {out_r valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/out_r_TVALID}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Output data} -label {out_r data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/out_r_TDATA}
+  add wave -noupdate -group {HWPE_MMUL_PARALLEL_kernel_wrapper[0]} -group {Output data} -label {out_r ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_engine/i_k_wrap/out_r_TREADY}
+add wave -noupdate -group {HWPE_streamer[0]} -group {global} -label {clk_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/clk_i}
+add wave -noupdate -group {HWPE_streamer[0]} -group {global} -label {rst_ni} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/rst_ni}
+add wave -noupdate -group {HWPE_streamer[0]} -group {global} -label {test_mode_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/test_mode_i}
+add wave -noupdate -group {HWPE_streamer[0]} -group {global} -label {enable_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/enable_i}
+add wave -noupdate -group {HWPE_streamer[0]} -group {global} -label {clear_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/clear_i}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {req} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/req}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {gnt} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/gnt}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {add} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/add}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {wen} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/wen}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {be} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/be}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {r_data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/r_data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_tcdm} -label {r_valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/tcdm[0]/r_valid}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_stream} -label {valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/stream/valid}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_stream} -label {ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/stream/ready}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_stream} -label {data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/stream/data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {intf_stream} -label {strb} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/stream/strb}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {ctrl_plane} -label {current_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/cs}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {ctrl_plane} -label {next_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/ns}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {ctrl_plane} -label {ctrl_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/ctrl_i}
+add wave -noupdate -group {HWPE_streamer[0]} -group {A_sink (in1)} -group {ctrl_plane} -label {flags_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_a_source/flags_o}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {req} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/req}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {gnt} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/gnt}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {add} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/add}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {wen} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/wen}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {be} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/be}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {r_data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/r_data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_tcdm} -label {r_valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/tcdm[0]/r_valid}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_stream} -label {valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/stream/valid}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_stream} -label {ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/stream/ready}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_stream} -label {data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/stream/data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {intf_stream} -label {strb} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/stream/strb}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {ctrl_plane} -label {current_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/cs}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {ctrl_plane} -label {next_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/ns}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {ctrl_plane} -label {ctrl_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/ctrl_i}
+add wave -noupdate -group {HWPE_streamer[0]} -group {B_sink (in2)} -group {ctrl_plane} -label {flags_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_b_source/flags_o}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {req} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/req}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {gnt} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/gnt}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {add} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/add}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {wen} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/wen}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {be} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/be}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {r_data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/r_data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_tcdm} -label {r_valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/tcdm[0]/r_valid}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_stream} -label {valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/stream/valid}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_stream} -label {ready} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/stream/ready}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_stream} -label {data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/stream/data}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {intf_stream} -label {strb} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/stream/strb}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {ctrl_plane} -label {current_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/cs}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {ctrl_plane} -label {next_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/ns}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {ctrl_plane} -label {ctrl_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/ctrl_i}
+add wave -noupdate -group {HWPE_streamer[0]} -group {C_sink (out_r)} -group {ctrl_plane} -label {flags_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_streamer/i_c_sink/flags_o}
+add wave -noupdate -group {HWPE_ctrl[0]} -label {clk_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/i_regfile/clk_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -label {rst_ni} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/i_regfile/rst_ni}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {add} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/add}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {wen} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/wen}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {be} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/be}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/data}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {id} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/id}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {r_data} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/r_data}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {r_valid} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/r_valid}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {cfg} -label {r_id} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/cfg/r_id}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {regfile} -label {clear_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/i_regfile/clear_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {regfile} -label {regfile/in} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/i_regfile/regfile_in_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {regfile} -label {regfile/out} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/i_regfile/regfile_out_o}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {regfile} -label {regfile/flags} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/i_regfile/flags_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {regfile} -label {regfile/ctrl} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_slave/i_regfile/reg_file}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {global} -label {clk_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/clk_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {global} -label {rst_ni} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/rst_ni}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {global} -label {test_mode_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/test_mode_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {global} -label {clear_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/clear_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {i/o} -label {ctrl_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/ctrl_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {i/o} -label {flags_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/flags_o}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {i/o} -label {uloop_code_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/uloop_code_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {uloop} -group {i/o} -label {registers_read_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_uloop/registers_read_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {global} -label {clk_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/clk_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {global} -label {rst_ni} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/rst_ni}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {global} -label {test_mode_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/test_mode_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {global} -label {clear_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/clear_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -label {current_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/curr_state}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -label {next_state} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/next_state}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -label {ctrl_fsm_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/ctrl_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {in_flags} -label {flags_streamer_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/flags_streamer_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {in_flags} -label {flags_engine_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/flags_engine_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {in_flags} -label {flags_ucode_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/flags_ucode_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {in_flags} -label {flags_slave_i} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/flags_slave_i}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {out_ctrl} -label {ctrl_streamer_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/ctrl_streamer_o}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {out_ctrl} -label {ctrl_engine_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/ctrl_engine_o}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {out_ctrl} -label {ctrl_ucode_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/ctrl_ucode_o}
+add wave -noupdate -group {HWPE_ctrl[0]} -group {FSM} -group {out_ctrl} -label {ctrl_slave_o} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/hwpe_gen/hwpe_wrap_i/i_hwpe_top_wrap/i_MMUL_PARALLEL_top/i_ctrl/i_fsm/ctrl_slave_o}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {inputs} -label {s_core_tcdm_bus_add} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/s_core_tcdm_bus_add}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {inputs} -label {iconn_inp_wdata} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/iconn_inp_wdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {outputs (to AMO)} -label {s_tcdm_bus_amo_shim_req} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/s_tcdm_bus_amo_shim_req}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {outputs (to AMO)} -label {s_tcdm_bus_amo_shim_gnt} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/s_tcdm_bus_amo_shim_gnt}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {outputs (to AMO)} -label {s_tcdm_bus_amo_shim_add} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/s_tcdm_bus_amo_shim_add}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {outputs (to AMO)} -label {s_tcdm_bus_amo_shim_wen} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/s_tcdm_bus_amo_shim_wen}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {outputs (to AMO)} -label {iconn_oup_wdata        } {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/iconn_oup_wdata        }
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {outputs (to AMO)} -label {s_tcdm_bus_amo_shim_be } {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/s_tcdm_bus_amo_shim_be }
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_interco} -group {outputs (to AMO)} -label {iconn_oup_rdata        } {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/iconn_oup_rdata        }
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/wdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/add}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/req}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/wen}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/be}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[0]/rdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/add}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/wdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/req}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/wen}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/be}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[1]/rdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[2]/add}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[2]/wdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[2]/req}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[2]/wen}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[2]/be}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[2]/rdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[3]/add}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[3]/wdata}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[3]/req}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[3]/wen}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[3]/be}
+add wave -noupdate -group {cluster_interconnect} -group {tcdm_sram_master} -group {tcdm_sram_master[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/tcdm_sram_master[3]/rdata}
+add wave -noupdate -group {sram} -group {intf_sram[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[0]/i_mem/req_i}
+add wave -noupdate -group {sram} -group {intf_sram[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[0]/i_mem/addr_i}
+add wave -noupdate -group {sram} -group {intf_sram[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[0]/i_mem/we_i}
+add wave -noupdate -group {sram} -group {intf_sram[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[0]/i_mem/wdata_i}
+add wave -noupdate -group {sram} -group {intf_sram[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[0]/i_mem/be_i}
+add wave -noupdate -group {sram} -group {intf_sram[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[0]/i_mem/rdata_o}
+add wave -noupdate -group {sram} -group {intf_sram[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[1]/i_mem/req_i}
+add wave -noupdate -group {sram} -group {intf_sram[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[1]/i_mem/addr_i}
+add wave -noupdate -group {sram} -group {intf_sram[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[1]/i_mem/we_i}
+add wave -noupdate -group {sram} -group {intf_sram[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[1]/i_mem/wdata_i}
+add wave -noupdate -group {sram} -group {intf_sram[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[1]/i_mem/be_i}
+add wave -noupdate -group {sram} -group {intf_sram[1]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[1]/i_mem/rdata_o}
+add wave -noupdate -group {sram} -group {intf_sram[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[2]/i_mem/req_i}
+add wave -noupdate -group {sram} -group {intf_sram[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[2]/i_mem/addr_i}
+add wave -noupdate -group {sram} -group {intf_sram[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[2]/i_mem/we_i}
+add wave -noupdate -group {sram} -group {intf_sram[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[2]/i_mem/wdata_i}
+add wave -noupdate -group {sram} -group {intf_sram[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[2]/i_mem/be_i}
+add wave -noupdate -group {sram} -group {intf_sram[2]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[2]/i_mem/rdata_o}
+add wave -noupdate -group {sram} -group {intf_sram[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[3]/i_mem/req_i}
+add wave -noupdate -group {sram} -group {intf_sram[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[3]/i_mem/addr_i}
+add wave -noupdate -group {sram} -group {intf_sram[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[3]/i_mem/we_i}
+add wave -noupdate -group {sram} -group {intf_sram[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[3]/i_mem/wdata_i}
+add wave -noupdate -group {sram} -group {intf_sram[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[3]/i_mem/be_i}
+add wave -noupdate -group {sram} -group {intf_sram[3]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/gen_tcdm_banks[3]/i_mem/rdata_o}
 add wave -noupdate -group {cl_inp[0]} {/pulp_tb/dut/cl_inp[0]/aw_id}
 add wave -noupdate -group {cl_inp[0]} {/pulp_tb/dut/cl_inp[0]/aw_addr}
 add wave -noupdate -group {cl_inp[0]} {/pulp_tb/dut/cl_inp[0]/aw_len}
@@ -594,331 +826,288 @@ add wave -noupdate -group {periph_demux[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cl
 add wave -noupdate -group {periph_demux[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_rdata_i_EU}
 add wave -noupdate -group {periph_demux[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_opc_i_EU}
 add wave -noupdate -group {periph_demux[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/request_destination}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/clk}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rst_n}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/test_en_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fregfile_disable_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fetch_enable_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ctrl_busy_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/core_ctrl_firstfetch_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/is_decoding_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_dec_cnt_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/is_hwlp_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_valid_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_rdata_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_req_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/branch_in_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/branch_decision_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_target_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/clear_instr_valid_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_set_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_mux_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_pc_mux_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/trap_addr_mux_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/illegal_c_insn_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/is_compressed_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_if_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_id_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/halt_if_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/id_ready_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ex_ready_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/wb_ready_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/id_valid_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ex_valid_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_a_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_b_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_c_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vec_ext_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_vec_mode_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_waddr_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_we_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_we_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_en_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operator_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operator_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operand_a_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operand_b_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operand_c_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_en_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_sel_subword_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_signed_mode_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_imm_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_op_a_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_op_b_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_op_c_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_signed_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_is_clpx_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_clpx_shift_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_clpx_img_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_en_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_type_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_op_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_lat_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_flags_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_waddr_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs_valid_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_dep_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs_valid_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_dep_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_perf_dep_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_busy_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/frm_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_access_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_op_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/current_priv_lvl_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_irq_sec_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_cause_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_save_if_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_save_id_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_restore_mret_id_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_restore_uret_id_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_save_cause_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_start_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_end_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_cnt_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_hwlp_regid_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_hwlp_we_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_hwlp_data_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_req_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_we_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_type_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_sign_ext_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_reg_offset_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_load_event_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_misaligned_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/prepost_useincr_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_misaligned_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/atop_ex_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_sec_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_id_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/m_irq_enable_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/u_irq_enable_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_ack_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_id_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_cause_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_mode_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_cause_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_csr_save_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_req_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_single_step_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_ebreakm_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_ebreaku_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_waddr_wb_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_we_wb_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_wdata_wb_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_fw_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_we_fw_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_wdata_fw_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_multicycle_i}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/perf_jump_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/perf_jr_stall_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/perf_ld_stall_o}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/deassert_we}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/illegal_insn_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ebrk_insn}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mret_insn_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/uret_insn_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ecall_insn_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pipe_flush_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rega_used_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regb_used_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regc_used_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/branch_taken_ex}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_in_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_in_dec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/misaligned_stall}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jr_stall}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/load_stall}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_apu_stall}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/halt_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_i_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_iz_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_s_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_sb_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_u_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_uj_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_z_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_s2_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_bi_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_s3_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vs_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vu_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_shuffleb_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_shuffleh_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_shuffle_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_clip_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_a}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_b}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_target}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_req_ctrl}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_sec_ctrl}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_id_ctrl}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_ack}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_kill}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_addr_ra_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_addr_rb_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_addr_rc_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_a}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_b}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_c}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_d}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_waddr_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_we_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_data_ra_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_data_rb_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_data_rc_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_en}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operator}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_op_a_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_op_b_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_op_c_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regc_mux}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_a_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_b_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_target_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operator}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_en}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_int_en}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_sel_subword}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_signed_mode}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_en}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_signed}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fpu_src_fmt}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fpu_dst_fmt}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fpu_int_fmt}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_en}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_type}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_op}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_lat}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_flags}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_waddr}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs_valid}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs_valid}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_flags_src}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_stall}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fp_rnd_mode}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_we_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_we_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_type_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_sign_ext_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_reg_offset_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_req_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_load_event_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/atop_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_regid}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_regid_int}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_we}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_we_int}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_target_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_start_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_cnt_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_target}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_start}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_start_int}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_end}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_cnt}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_cnt_int}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_valid}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_access}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_op}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_status}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/prepost_useincr}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_a_fw_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b_fw_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_c_fw_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_a_fw_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b_fw_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_c_fw_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b_vec}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_a}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_b}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_c}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_mux}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_mux}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_bmask_a_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_bmask_b_mux_sel}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_imm_mux}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_id_imm}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_id_imm}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vec_ext_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_imm_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_vec_mode}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/scalar_replication}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_ex_is_reg_a_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_ex_is_reg_b_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_ex_is_reg_c_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_wb_is_reg_a_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_wb_is_reg_b_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_wb_is_reg_c_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_alu_is_reg_a_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_alu_is_reg_b_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_alu_is_reg_c_id}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/opcode}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/funct3}
-add wave -noupdate -group {core[0][0]/id_stage} -radix unsigned {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rd}
-add wave -noupdate -group {core[0][0]/id_stage} -radix unsigned {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rs1}
-add wave -noupdate -group {core[0][0]/id_stage} -radix unsigned {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rs2}
-add wave -noupdate -group {core[0][0]/id_stage} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/stack_access_o}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_id}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_addr}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_len}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_size}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_burst}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_lock}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_cache}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_prot}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_qos}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_region}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_atop}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_user}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_valid}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/aw_ready}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/w_data}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/w_strb}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/w_last}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/w_user}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/w_valid}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/w_ready}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/b_id}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/b_resp}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/b_user}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/b_valid}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/b_ready}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_id}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_addr}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_len}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_size}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_burst}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_lock}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_cache}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_prot}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_qos}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_region}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_user}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_valid}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/ar_ready}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/r_id}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/r_data}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/r_resp}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/r_last}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/r_user}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/r_valid}
-add wave -noupdate -group {core_instr_bus[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/s_core_instr_bus/r_ready}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/clk}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rst_n}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/test_en_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fregfile_disable_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fetch_enable_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ctrl_busy_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/core_ctrl_firstfetch_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/is_decoding_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_dec_cnt_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/is_hwlp_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_valid_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_rdata_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr_req_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/branch_in_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/branch_decision_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_target_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/clear_instr_valid_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_set_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_mux_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_pc_mux_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/trap_addr_mux_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/illegal_c_insn_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/is_compressed_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_if_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_id_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/halt_if_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/id_ready_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ex_ready_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/wb_ready_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/id_valid_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ex_valid_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pc_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_a_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_b_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_c_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vec_ext_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_vec_mode_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_waddr_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_we_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_we_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_en_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operator_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operator_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operand_a_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operand_b_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operand_c_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_en_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_sel_subword_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_signed_mode_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_imm_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_op_a_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_op_b_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_op_c_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_signed_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_is_clpx_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_clpx_shift_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_clpx_img_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_en_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_type_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_op_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_lat_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_flags_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_waddr_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs_valid_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_dep_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs_valid_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_dep_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_perf_dep_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_busy_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/frm_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_access_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_op_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/current_priv_lvl_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_irq_sec_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_cause_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_save_if_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_save_id_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_restore_mret_id_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_restore_uret_id_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_save_cause_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_start_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_end_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwlp_cnt_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_hwlp_regid_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_hwlp_we_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_hwlp_data_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_req_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_we_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_type_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_sign_ext_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_reg_offset_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_load_event_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_misaligned_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/prepost_useincr_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_misaligned_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/atop_ex_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_sec_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_id_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/m_irq_enable_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/u_irq_enable_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_ack_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_id_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_cause_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_mode_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_cause_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_csr_save_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_req_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_single_step_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_ebreakm_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/debug_ebreaku_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_waddr_wb_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_we_wb_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_wdata_wb_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_fw_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_we_fw_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_wdata_fw_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_multicycle_i}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/perf_jump_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/perf_jr_stall_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/perf_ld_stall_o}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/instr}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/deassert_we}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/illegal_insn_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ebrk_insn}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mret_insn_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/uret_insn_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/ecall_insn_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/pipe_flush_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rega_used_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regb_used_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regc_used_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/branch_taken_ex}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_in_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_in_dec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/misaligned_stall}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jr_stall}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/load_stall}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_apu_stall}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/halt_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_i_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_iz_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_s_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_sb_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_u_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_uj_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_z_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_s2_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_bi_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_s3_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vs_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vu_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_shuffleb_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_shuffleh_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_shuffle_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_clip_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_a}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_b}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_target}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_req_ctrl}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_sec_ctrl}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/irq_id_ctrl}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_ack}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/exc_kill}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_addr_ra_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_addr_rb_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_addr_rc_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_a}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_b}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_c}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_fp_d}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_waddr_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_we_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_data_ra_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_data_rb_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_data_rc_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_en}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operator}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_op_a_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_op_b_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_op_c_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regc_mux}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_a_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_b_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/jump_target_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_operator}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_en}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_int_en}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_sel_subword}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_signed_mode}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_en}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_dot_signed}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fpu_src_fmt}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fpu_dst_fmt}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fpu_int_fmt}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_en}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_type}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_op}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_lat}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_flags}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_waddr}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_read_regs_valid}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_write_regs_valid}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_flags_src}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/apu_stall}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/fp_rnd_mode}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_we_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/regfile_alu_waddr_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_we_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_type_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_sign_ext_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_reg_offset_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_req_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/data_load_event_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/atop_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_regid}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_regid_int}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_we}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_we_int}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_target_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_start_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_cnt_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_target}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_start}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_start_int}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_end}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_cnt}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_cnt_int}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/hwloop_valid}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_access}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_op}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/csr_status}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/prepost_useincr}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_a_fw_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b_fw_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_c_fw_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_a_fw_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b_fw_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_c_fw_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/operand_b_vec}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_a}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_b}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_operand_c}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_mux}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_mux}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_bmask_a_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_bmask_b_mux_sel}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_imm_mux}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_id_imm}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_id_imm}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_a_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/bmask_b_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/imm_vec_ext_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/mult_imm_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/alu_vec_mode}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/scalar_replication}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_ex_is_reg_a_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_ex_is_reg_b_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_ex_is_reg_c_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_wb_is_reg_a_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_wb_is_reg_b_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_wb_is_reg_c_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_alu_is_reg_a_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_alu_is_reg_b_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/reg_d_alu_is_reg_c_id}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/opcode}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/funct3}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} -radix unsigned {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rd}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} -radix unsigned {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rs1}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} -radix unsigned {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/rs2}
+add wave -noupdate -group -group {core[0][0]} -group {id_stage} -group {tobeclassified} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/stack_access_o}
+add wave -noupdate -group {core[0][0]} -group {id_stage} -group {controller} -label {ctrl_fsm_cs} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/controller_i/ctrl_fsm_cs}
+add wave -noupdate -group {core[0][0]} -group {id_stage} -group {controller} -label {ctrl_fsm_ns} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/RISCV_CORE/id_stage_i/controller_i/ctrl_fsm_ns}
 add wave -noupdate -group periph_mst /pulp_tb/dut/periph_mst/aw_id
 add wave -noupdate -group periph_mst /pulp_tb/dut/periph_mst/aw_addr
 add wave -noupdate -group periph_mst /pulp_tb/dut/periph_mst/aw_len
@@ -1025,256 +1214,6 @@ add wave -noupdate -group soc_ctrl_regs/apb /pulp_tb/dut/i_periphs/i_soc_ctrl_re
 add wave -noupdate -group soc_ctrl_regs/apb /pulp_tb/dut/i_periphs/i_soc_ctrl_regs/apb/prdata
 add wave -noupdate -group soc_ctrl_regs/apb /pulp_tb/dut/i_periphs/i_soc_ctrl_regs/apb/pready
 add wave -noupdate -group soc_ctrl_regs/apb /pulp_tb/dut/i_periphs/i_soc_ctrl_regs/apb/pslverr
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/clk}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/rst_ni}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/test_en_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/base_addr_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_req_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_add_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wen_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_atop_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wdata_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_be_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_gnt_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_gnt_i}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_valid_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_rdata_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_opc_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_req_o_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_add_o_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wen_o_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wdata_o_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_be_o_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_gnt_i_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_valid_i_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_rdata_i_SH}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_req_o_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_add_o_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wen_o_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wdata_o_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_be_o_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_gnt_i_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_valid_i_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_rdata_i_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_opc_i_EXT}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_req_o_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_add_o_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wen_o_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_atop_o_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wdata_o_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_be_o_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_gnt_i_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_valid_i_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_opc_i_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_rdata_i_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/perf_l2_ld_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/perf_l2_st_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/perf_l2_ld_cyc_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/perf_l2_st_cyc_o}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/CLUSTER_ID}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/CLUSTER_ALIAS_BASE_11}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/CLUSTER_ALIAS_BASE_12}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/CLUSTER_ALIAS_TCDM_RW}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/CLUSTER_ALIAS_TCDM_TS}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/CLUSTER_ALIAS_DEM_PER}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_req_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_gnt_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_r_data_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_r_valid_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_r_opc_PE}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_r_data_PE_0}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_r_valid_PE_0}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/s_data_r_opc_PE_0}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/CS}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/NS}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_req_to_L2}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_add_to_L2}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wen_to_L2}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wdata_to_L2}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_be_to_L2}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_gnt_from_L2}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/request_destination}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/destination}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_add_int}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_busy_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_req_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_add_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wen_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_atop_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_wdata_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_be_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_gnt_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_valid_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_opc_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/data_r_rdata_PE_fifo}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/TCDM_RW}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/TCDM_TS}
-add wave -noupdate -group {core[1][0]/core_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/core_demux_i/DEM_PER}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/clk}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/rst_ni}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_req_i}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_add_i}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_wen_i}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_wdata_i}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_be_i}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_gnt_o}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_valid_o}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_rdata_o}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_opc_o}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_req_o_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_add_o_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_wen_o_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_wdata_o_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_be_o_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_gnt_i_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_valid_i_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_rdata_i_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_opc_i_MH}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_req_o_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_add_o_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_wen_o_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_wdata_o_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_be_o_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_gnt_i_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_valid_i_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_rdata_i_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/data_r_opc_i_EU}
-add wave -noupdate -group {core[1][0]/periph_demux} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/CORE[0]/core_region_i/periph_demux_i/request_destination}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_id}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_addr}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_len}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_size}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_burst}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_lock}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_cache}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_prot}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_qos}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_region}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_atop}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_user}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_valid}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/aw_ready}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/w_data}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/w_strb}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/w_last}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/w_user}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/w_valid}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/w_ready}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/b_id}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/b_resp}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/b_user}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/b_valid}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/b_ready}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_id}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_addr}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_len}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_size}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_burst}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_lock}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_cache}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_prot}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_qos}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_region}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_user}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_valid}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/ar_ready}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/r_id}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/r_data}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/r_resp}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/r_last}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/r_user}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/r_valid}
-add wave -noupdate -group {cl_inp[1]} {/pulp_tb/dut/cl_inp[1]/r_ready}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_id}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_addr}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_len}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_size}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_burst}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_lock}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_cache}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_prot}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_qos}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_region}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_atop}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_user}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_valid}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/aw_ready}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/w_data}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/w_strb}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/w_last}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/w_user}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/w_valid}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/w_ready}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/b_id}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/b_resp}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/b_user}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/b_valid}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/b_ready}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_id}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_addr}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_len}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_size}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_burst}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_lock}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_cache}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_prot}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_qos}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_region}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_user}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_valid}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/ar_ready}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/r_id}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/r_data}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/r_resp}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/r_last}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/r_user}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/r_valid}
-add wave -noupdate -group {cl_oup_prepacker[1]} {/pulp_tb/dut/cl_oup_prepacker[1]/r_ready}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_id}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_addr}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_len}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_size}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_burst}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_lock}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_cache}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_prot}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_qos}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_region}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_atop}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_user}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_valid}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/aw_ready}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/w_data}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/w_strb}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/w_last}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/w_user}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/w_valid}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/w_ready}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/b_id}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/b_resp}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/b_user}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/b_valid}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/b_ready}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_id}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_addr}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_len}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_size}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_burst}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_lock}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_cache}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_prot}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_qos}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_region}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_user}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_valid}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/ar_ready}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/r_id}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/r_data}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/r_resp}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/r_last}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/r_user}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/r_valid}
-add wave -noupdate -group {cl_oup[1]} {/pulp_tb/dut/cl_oup[1]/r_ready}
 add wave -noupdate -group {l2_mst[0]} {/pulp_tb/dut/l2_mst[0]/aw_id}
 add wave -noupdate -group {l2_mst[0]} {/pulp_tb/dut/l2_mst[0]/aw_addr}
 add wave -noupdate -group {l2_mst[0]} {/pulp_tb/dut/l2_mst[0]/aw_len}
@@ -1320,247 +1259,6 @@ add wave -noupdate -group {l2_mst[0]} {/pulp_tb/dut/l2_mst[0]/r_last}
 add wave -noupdate -group {l2_mst[0]} {/pulp_tb/dut/l2_mst[0]/r_user}
 add wave -noupdate -group {l2_mst[0]} {/pulp_tb/dut/l2_mst[0]/r_valid}
 add wave -noupdate -group {l2_mst[0]} {/pulp_tb/dut/l2_mst[0]/r_ready}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_id}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_addr}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_len}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_size}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_burst}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_lock}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_cache}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_prot}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_qos}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_region}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_atop}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_user}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_valid}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/aw_ready}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/w_data}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/w_strb}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/w_last}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/w_user}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/w_valid}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/w_ready}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/b_id}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/b_resp}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/b_user}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/b_valid}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/b_ready}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_id}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_addr}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_len}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_size}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_burst}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_lock}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_cache}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_prot}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_qos}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_region}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_user}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_valid}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/ar_ready}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/r_id}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/r_data}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/r_resp}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/r_last}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/r_user}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/r_valid}
-add wave -noupdate -group {l2_mst_wo_atomics[0]} {/pulp_tb/dut/l2_mst_wo_atomics[0]/r_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_addr}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_burst}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_cache}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_id}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_len}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_lock}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_prot}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_qos}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_region}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_size}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_user}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_ar_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_addr}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_atop}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_burst}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_cache}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_id}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_len}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_lock}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_prot}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_qos}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_region}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_size}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_user}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_aw_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_b_id}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_b_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_b_resp}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_b_user}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_b_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_r_data}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_r_id}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_r_last}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_r_resp}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_r_user}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_r_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_r_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_w_data}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_w_last}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_w_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_w_strb}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_w_user}
-add wave -noupdate -group {l2_bank[0]/i_atomics/int_axi} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/int_axi_w_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/clk_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/rst_ni}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_addr_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_prot_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_region_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_atop_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_len_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_size_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_burst_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_lock_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_cache_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_qos_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_id_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_user_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_ready_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_aw_valid_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_addr_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_prot_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_region_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_len_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_size_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_burst_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_lock_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_cache_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_qos_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_id_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_user_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_ready_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_ar_valid_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_w_data_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_w_strb_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_w_user_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_w_last_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_w_ready_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_w_valid_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_r_data_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_r_resp_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_r_last_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_r_id_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_r_user_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_r_ready_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_r_valid_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_b_resp_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_b_id_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_b_user_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_b_ready_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/slv_b_valid_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_addr_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_prot_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_region_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_atop_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_len_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_size_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_burst_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_lock_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_cache_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_qos_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_id_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_user_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_ready_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_aw_valid_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_addr_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_prot_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_region_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_len_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_size_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_burst_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_lock_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_cache_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_qos_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_id_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_user_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_ready_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_ar_valid_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_w_data_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_w_strb_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_w_user_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_w_last_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_w_ready_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_w_valid_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_r_data_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_r_resp_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_r_last_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_r_id_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_r_user_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_r_ready_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_r_valid_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_b_resp_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_b_id_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_b_user_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_b_ready_o}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/mst_b_valid_i}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/aw_state_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_state_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/b_state_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/ar_state_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_state_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/atop_valid_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/addr_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/id_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/strb_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/size_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/atop_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/cache_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/prot_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/qos_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/region_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_resp_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/aw_user_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_user_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_user_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_data_d}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_data_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_data_d}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_data_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/result_d}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/result_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_d_valid_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_d_valid_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_cnt_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_cnt_req_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_cnt_inj_q}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/adapter_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/transaction_collision}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/aw_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/aw_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/aw_free}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/w_free}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/b_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/b_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/b_free}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/ar_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/ar_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/ar_free}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_valid}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_ready}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/r_free}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/alu_operand_a}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/alu_operand_b}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/alu_result}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/alu_result_ext}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/op_a}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/op_b}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/op_a_sign_ext}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/op_b_sign_ext}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/res}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/strb_ext}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/sign_a}
-add wave -noupdate -group {l2_bank[0]/i_atomics/i_amos} {/pulp_tb/dut/gen_l2_ports[0]/i_atomics/i_atomics/i_amos/sign_b}
 add wave -noupdate -group {dma[0]/ext_master} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/dmac_wrap_i/ext_master/aw_id}
 add wave -noupdate -group {dma[0]/ext_master} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/dmac_wrap_i/ext_master/aw_addr}
 add wave -noupdate -group {dma[0]/ext_master} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/dmac_wrap_i/ext_master/aw_len}
@@ -1661,39 +1359,6 @@ add wave -noupdate -group {speriph_master[HWPE]} {/pulp_tb/dut/gen_clusters[0]/g
 add wave -noupdate -group {speriph_master[HWPE]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[4]/r_opc}
 add wave -noupdate -group {speriph_master[HWPE]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[4]/r_id}
 add wave -noupdate -group {speriph_master[HWPE]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[4]/r_rdata}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/req}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/add}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/wen}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/wdata}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/be}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/gnt}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/id}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/r_valid}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/r_opc}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/r_id}
-add wave -noupdate -group {speriph_master[ICACHE_CTRL]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[5]/r_rdata}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/req}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/add}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/wen}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/wdata}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/be}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/gnt}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/id}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/r_valid}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/r_opc}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/r_id}
-add wave -noupdate -group {speriph_master[DMA]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[6]/r_rdata}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/req}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/add}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/wen}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/wdata}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/be}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/gnt}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/id}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/r_valid}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/r_opc}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/r_id}
-add wave -noupdate -group {speriph_master[EXT]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/speriph_master[7]/r_rdata}
 add wave -noupdate -group {core_periph_slave[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[0]/req}
 add wave -noupdate -group {core_periph_slave[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[0]/gnt}
 add wave -noupdate -group {core_periph_slave[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[0]/add}
@@ -1705,17 +1370,6 @@ add wave -noupdate -group {core_periph_slave[0]} {/pulp_tb/dut/gen_clusters[0]/g
 add wave -noupdate -group {core_periph_slave[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[0]/r_opc}
 add wave -noupdate -group {core_periph_slave[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[0]/r_id}
 add wave -noupdate -group {core_periph_slave[0]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[0]/r_rdata}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/req}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/add}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/wen}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/wdata}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/be}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/gnt}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/id}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/r_valid}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/r_opc}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/r_id}
-add wave -noupdate -group {core_periph_slave[5]} {/pulp_tb/dut/gen_clusters[0]/gen_cluster_sync/i_cluster/i_ooc/i_bound/cluster_interconnect_wrap_i/core_periph_slave[5]/r_rdata}
 add wave -noupdate -group {TB I/O} /pulp_tb/dut/clk_i
 add wave -noupdate -group {TB I/O} /pulp_tb/dut/rst_ni
 add wave -noupdate -group {TB I/O} /pulp_tb/dut/cl_fetch_en_i
@@ -1727,109 +1381,6 @@ add wave -noupdate -group {TB I/O} /pulp_tb/to_pulp_req
 add wave -noupdate -group {TB I/O} /pulp_tb/to_pulp_resp
 add wave -noupdate -group {TB I/O} /pulp_tb/rab_conf_req
 add wave -noupdate -group {TB I/O} /pulp_tb/rab_conf_resp
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/clk_i}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/rst_ni}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/busy_o}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.aw}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.aw_valid}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_resp_o.aw_ready}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.w}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.w_valid}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_resp_o.w_ready}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_resp_o.b}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_resp_o.b_valid}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.b_ready}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.ar}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.ar_valid}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_resp_o.ar_ready}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_resp_o.r}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_resp_o.r_valid}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/axi_req_i.r_ready}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_req_o}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_gnt_i}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_addr_o}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_wdata_o}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_strb_o}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_atop_o}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_we_o}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_rvalid_i}
-add wave -noupdate -group {cluster[1]/axi2mem} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/mem_rdata_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/clk_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/rst_ni}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/req_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/gnt_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/addr_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/wdata_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/strb_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/atop_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/we_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/rvalid_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/rdata_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_req_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_gnt_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_addr_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_wdata_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_strb_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_atop_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_we_o}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_rvalid_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/bank_rdata_i}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/resp_valid}
-add wave -noupdate -group {cluster[1]/axi2mem/mem_banks} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/i_axi2mem/i_mem2banks/resp_ready}
-add wave -noupdate -subitemconfig {{/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/ext_tcdm_req.aw} -expand} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/ext_tcdm_req}
-add wave -noupdate {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/ext_tcdm_req_buf}
-add wave -noupdate -subitemconfig {{/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/ext_tcdm_resp.b} -expand} {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/ext_tcdm_resp}
-add wave -noupdate {/pulp_tb/dut/gen_clusters[1]/gen_cluster_sync/i_cluster/i_ooc/i_bound/ext_tcdm_resp_buf}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_id}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_addr}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_len}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_size}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_burst}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_lock}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_cache}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_prot}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_qos}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_region}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_atop}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_user}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_valid}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/aw_ready}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/w_data}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/w_strb}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/w_last}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/w_user}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/w_valid}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/w_ready}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/b_id}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/b_resp}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/b_user}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/b_valid}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/b_ready}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_id}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_addr}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_len}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_size}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_burst}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_lock}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_cache}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_prot}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_qos}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_region}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_user}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_valid}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/ar_ready}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/r_id}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/r_data}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/r_resp}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/r_last}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/r_user}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/r_valid}
-add wave -noupdate -group {cl_inp_remapped[1]} {/pulp_tb/dut/cl_inp_remapped[1]/r_ready}
-add wave -noupdate -group host_to_pulp_tlb /pulp_tb/dut/i_host_to_pulp_tlb/*
-add wave -noupdate -group host_to_pulp_tlb_l1 /pulp_tb/dut/i_host_to_pulp_tlb/i_l1_tlb/*
-add wave -noupdate -group pulp_to_host_tlb /pulp_tb/dut/i_pulp_to_host_tlb/*
-add wave -noupdate -group pulp_to_host_tlb_l1 /pulp_tb/dut/i_pulp_to_host_tlb/i_l1_tlb/*
-TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 11} {35680473 ps} 1} {W {35686614 ps} 1} {{Cursor 13} {35800671 ps} 1} {{Cursor 14} {16000 ps} 0}
 quietly wave cursor active 4
 configure wave -namecolwidth 271

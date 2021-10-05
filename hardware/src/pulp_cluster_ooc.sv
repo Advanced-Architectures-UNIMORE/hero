@@ -165,13 +165,14 @@ module pulp_cluster_ooc (
   pulp_cluster #(
     .ASYNC_INTF               (pulp_cluster_cfg_pkg::ASYNC),
     .NB_CORES                 (pulp_cluster_cfg_pkg::N_CORES),
-    .NB_HWACC_PORTS           (0),
     .NB_DMAS                  (pulp_cluster_cfg_pkg::N_DMAS),
     .CLUSTER_ALIAS            (1'b1),
     .CLUSTER_ALIAS_BASE       (12'h1B0),
     .TCDM_SIZE                (pulp_cluster_cfg_pkg::TCDM_SIZE),
     .NB_TCDM_BANKS            (pulp_cluster_cfg_pkg::N_TCDM_BANKS),
-    .XNE_PRESENT              (1'b0),
+    // HWPE
+    .HWACC_PRESENT            (pulp_cluster_hwpe_pkg::HWPE_PRESENT),
+    .NB_HWACC_PORTS           (pulp_cluster_hwpe_pkg::N_HWPE_PORTS),
     // I$ Parameters
     .NB_CACHE_BANKS           (4),
     .CACHE_SIZE               (pulp_cluster_cfg_pkg::ICACHE_SIZE),
