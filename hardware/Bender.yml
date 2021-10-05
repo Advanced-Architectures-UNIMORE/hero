@@ -9,13 +9,14 @@ dependencies:
   axi_riscv_atomics: { git: "https://github.com/pulp-platform/axi_riscv_atomics.git", rev: fix-ordering }
   axi_slice_dc: { git: "https://github.com/pulp-platform/axi_slice_dc.git", rev: atomics }
   common_verification: { git: "https://github.com/pulp-platform/common_verification.git", rev: release-0.2 }
-  pulp_cluster: { git: "https://github.com/pulp-platform/pulp_cluster.git", rev: atomics }
+  overlay_cluster: { git: "https://git.hipert.unimore.it/gbellocchi/overlay_cluster.git", rev: master }
 
 workspace:
   checkout_dir: "./deps"
 
 export_include_dirs:
   - src/apb/include # TODO: move to APB repository
+  - src/include
 
 sources:
   # generic APB modules; to be moved to APB repository
@@ -26,6 +27,7 @@ sources:
   # Level 0
   - src/hero_axi_mailbox.sv
   - src/pulp_cluster_cfg_pkg.sv
+  - src/ov_acc_pkg.sv
   - src/soc_bus.sv
   - src/soc_ctrl_regs.sv
   - src/dmac_wrap_ooc.sv
