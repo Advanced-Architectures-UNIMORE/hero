@@ -1,0 +1,80 @@
+# HERO - Additional documentation 
+
+## Getting Started
+
+### Environment
+
+Set the following environment variable to the top directory of your HERO ecosystem:
+
+```
+export HERO_HOME_DIR= ** (e.g. $HOME/workspace_pulp/hero)
+```
+
+Be sure to source the dynamic environment on the development machine: 
+
+```
+source env/exilzcu102.sh
+```
+
+Set the following environment variable to the target host:
+
+```
+export HERO_TARGET_HOST= ** (e.g. root@hero-zcu102)
+```
+
+### HERO target library
+
+To compile the HERO target libraries, move to the '$HERO_HOME_DIR/support/libhero-target'
+and build libhero-target:
+
+```
+make build
+```
+
+To export the library binary to the board, be sure that the recipe 'install' of the host
+is like this:
+
+```
+install:
+	scp $(LIB_DIR)/* ${HERO_TARGET_HOST}:${HERO_TARGET_PATH_LIB}
+```
+
+This command will basically copy the library binary through SSH. For this to happen, it is important 
+to have properly set 'HERO_TARGET_HOST'.
+
+### Location of compiled libraries
+
+Once you have built the complete Linux environment with kernel and the base root filesystem for 
+the ARMv8 host on the Xilinx Zynq UltraScale+ MPSoC ZCU102 (command: make br-har-exilzcu102), 
+you will also find the compiled libraries (also HERO and OpenMP targets) under:
+
+```
+$HERO_HOME_DIR/output/br-har-exilzcu102/target/usr/lib
+```
+
+At this point you can directly copy the missing files through ssh to your board, e.g.:
+
+```
+scp libomptarget. root@hero-zcu102-08:/lib/
+```
+
+Note that this will not be permanent.
+
+### run 'hello world' example
+
+```
+cd ${HERO_TARGET_HOST}/openmp-examples/helloworld
+make
+```
+
+Open '${HERO_TARGET_HOST}/openmp-examples/common/default.mk' and add the following temporary recipe:
+
+```
+run_tmp:
+	@ssh $(HERO_TARGET_HOST) "rm -f /home/root/$(EXE)"
+	@scp $(EXE) $(HERO_TARGET_HOST):/home/root/
+```
+
+This is just a temporary workaround to pass application binaries to the board.
+
+Open an SSH terminal to the board and run the application that should be located at 'home/root'.
