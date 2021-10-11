@@ -21,7 +21,11 @@ module pulp_tb #(
   // SoC Parameters
   parameter int unsigned  N_CLUSTERS = 2,
   parameter int unsigned  AXI_DW = 128,
-  parameter int unsigned  L2_N_AXI_PORTS = 1
+  parameter int unsigned  L2_N_AXI_PORTS = 1,
+
+  // Cluster Parameters
+  parameter int unsigned  N_CORE = pulp_cluster_cfg_pkg::N_CORES,
+  parameter int unsigned  N_TCDM_BANKS = pulp_cluster_cfg_pkg::N_TCDM_BANKS
 );
 
   timeunit 1ps;
@@ -333,9 +337,34 @@ module pulp_tb #(
     $finish();
   end
 
+  // // Fill TCDM memory.
+  // for (genvar iCluster = 0; iCluster < N_CLUSTERS; iCluster++) begin: gen_fill_tcdm_cluster
+  //   for (genvar iBank = 0; iBank < 16; iBank++) begin: gen_fill_tcdm_bank
+  //     initial begin
+  //       $readmemh($sformatf("../test/slm_files/l1_0_%01d.slm", iBank),
+  //         dut.gen_clusters[iCluster].gen_cluster_sync.i_cluster.i_ooc.i_bound.gen_tcdm_banks[iBank].i_tc_sram.sram);
+  //     end
+  //   end
+  // end
+
+  // // Fill L2 memory.
+  // localparam N_SER_CUTS = dut.gen_l2_ports[0].i_l2_mem.N_SER_CUTS; // both same on all ports
+  // localparam N_PAR_CUTS = dut.gen_l2_ports[0].i_l2_mem.N_PAR_CUTS;
+  // for (genvar iPort = 0; iPort < L2_N_AXI_PORTS; iPort++) begin: gen_fill_l2_ports
+  //   for (genvar iRow = 0; iRow < N_SER_CUTS; iRow++) begin: gen_fill_l2_rows
+  //     for (genvar iCol = 0; iCol < N_PAR_CUTS; iCol++) begin: gen_fill_l2_cols
+  //       int unsigned file_ser_idx = iPort*N_SER_CUTS + iRow;
+  //       initial begin
+  //         $readmemh($sformatf("../test/slm_files/l2_%01d_%01d.slm", file_ser_idx, iCol),
+  //           dut.gen_l2_ports[iPort].i_l2_mem.gen_rows[iRow].gen_cols[iCol].i_tc_sram_cut.sram);
+  //       end
+  //     end
+  //   end
+  // end
+
   // Fill TCDM memory.
   for (genvar iCluster = 0; iCluster < N_CLUSTERS; iCluster++) begin: gen_fill_tcdm_cluster
-    for (genvar iBank = 0; iBank < 16; iBank++) begin: gen_fill_tcdm_bank
+    for (genvar iBank = 0; iBank < N_TCDM_BANKS; iBank++) begin: gen_fill_tcdm_bank
       initial begin
         $readmemh($sformatf("../test/slm_files/l1_0_%01d.slm", iBank),
           dut.gen_clusters[iCluster].gen_cluster_sync.i_cluster.i_ooc.i_bound.gen_tcdm_banks[iBank].i_tc_sram.sram);
@@ -346,6 +375,7 @@ module pulp_tb #(
   // Fill L2 memory.
   localparam N_SER_CUTS = dut.gen_l2_ports[0].i_l2_mem.N_SER_CUTS; // both same on all ports
   localparam N_PAR_CUTS = dut.gen_l2_ports[0].i_l2_mem.N_PAR_CUTS;
+
   for (genvar iPort = 0; iPort < L2_N_AXI_PORTS; iPort++) begin: gen_fill_l2_ports
     for (genvar iRow = 0; iRow < N_SER_CUTS; iRow++) begin: gen_fill_l2_rows
       for (genvar iCol = 0; iCol < N_PAR_CUTS; iCol++) begin: gen_fill_l2_cols
