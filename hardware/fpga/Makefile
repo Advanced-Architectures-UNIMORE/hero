@@ -8,11 +8,14 @@ DEFINE_TCLS := \
 VIVADO := vitis-2019.2 vivado
 VIVADO_OPT :=-mode batch
 
+DESIGN_NAME := hero_exilzcu102
+DESIGN_LOCATION := ${GBELLOCCHI_SCRATCH2}/design_fpga
+
 .PHONY: all
 all: hero_exilzcu102
 
-hero_exilzcu102: vivado_ips/pulp_txilzu9eg ${DEFINE_TCLS}
-	${VIVADO} ${VIVADO_OPT} -source hero_exilzcu102.tcl
+design_fpga: vivado_ips/pulp_txilzu9eg ${DEFINE_TCLS}
+	${VIVADO} ${VIVADO_OPT} -source hero_exilzcu102.tcl ${DESIGN_NAME} ${DESIGN_LOCATION}
 
 vivado_ips/pulp_txilzu9eg: ${DEFINE_TCLS}
 	cd vivado_ips && ${VIVADO} ${VIVADO_OPT} -source pulp_txilzu9eg.tcl
