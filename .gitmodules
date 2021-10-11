@@ -19,4 +19,7 @@
 	url = git@iis-git.ee.ethz.ch:H2020-Compiler/HerculesCompiler-public.git
 [submodule "hardware/deps/hwpe-generated-ex"]
 	path = hardware/deps/hwpe-generated-ex
-	url = https://git.hipert.unimore.it/comp4drones/HERO/hwpe-generated-ex
+	url = https://git.hipert.unimore.it/comp4drones/HERO/hwpe-generated-ex.git
+[submodule "hardware/deps/overlay_cluster"]
+	path = hardware/deps/overlay_cluster
+	url = https://git.hipert.unimore.it/comp4drones/HERO/overlay_cluster.git
