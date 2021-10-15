@@ -6,12 +6,14 @@ if [[ -z "${HERO_INSTALL}" ]]; then
 fi
 export PATH=${HERO_INSTALL}/bin:$PATH
 
+export PULP_CURRENT_CONFIG=hero-urania@config_file=${HERO_PULP_SDK_DIR}/configs/json/hero-urania.json
+
 if [[ -z "${HERO_TARGET_HOST}" ]]; then
   export HERO_TARGET_PATH="/mnt/root/"
 fi
 export HERO_TARGET_PATH_APPS="${HERO_TARGET_PATH}/apps"
 export HERO_TARGET_PATH_DRIVER="${HERO_TARGET_PATH}/drivers"
-export HERO_TARGET_PATH_LIB="${HERO_TARGET_PATH}/libs"
+export HERO_TARGET_PATH_LIB="${HERO_TARGET_PATH}/lib"
 
 export PLATFORM=ZYNQMP
 export BOARD=ZYNQMP
