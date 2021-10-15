@@ -32,7 +32,8 @@ export HERO_PULP_SDK_DIR=$(readlink -f "$THIS_DIR/../pulp/sdk")
 
 source ${HERO_PULP_SDK_DIR}/init.sh > /dev/null
 if [ -f ${HERO_PULP_SDK_DIR}/sourceme.sh ]; then
-    export HERO_PULP_INC_DIR=${HERO_PULP_SDK_DIR}/pkg/sdk/dev/install/include
+    export HERO_HOST_INC_DIR=${HERO_OV_HOME_DIR}/support/libhero-target/inc
+    export HERO_PULP_INC_DIR=${HERO_PULP_SDK_DIR}/pkg/sdk/dev/install/include:${HERO_PULP_SDK_DIR}/pkg/sdk/dev/install/hero/hero-sim
     source ${HERO_PULP_SDK_DIR}/sourceme.sh
 fi
 
