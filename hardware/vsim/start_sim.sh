@@ -2,7 +2,9 @@
 
 set -e
 
-if [ -n "$CI" -o -z "$DISPLAY" ]; then
+readonly vsim_gui="$1"
+
+if $vsim_gui; then
     # Run in console-only mode.
     vsim-10.7b -c -do 'source run.tcl; quit -code $quitCode'
 else
