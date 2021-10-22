@@ -95,10 +95,10 @@ packages:
       Git: "https://github.com/pulp-platform/event_unit_flex.git"
     dependencies: []
   hwpe-generated-ex:
-    revision: d74c39949b0e3ded0f993a357066b54576f70085
+    revision: 3fa00585882b09232c25d31db1ded0565724d43f
     version: 1.0.0
     source:
-      Git: "https://git.hipert.unimore.it/comp4drones/HERO/hwpe-generated-ex"
+      Git: "https://git.hipert.unimore.it/comp4drones/HERO/hwpe-generated-ex.git"
     dependencies: []
   icache-intc:
     revision: 42aee659c80b682ceb7a74ec3f8fd9ba054fea59
@@ -118,7 +118,7 @@ packages:
       - icache-intc
       - scm
   overlay_cluster:
-    revision: baca2f42921f09b5c7fb475cbf6e33440361a9c4
+    revision: 9414769e8dcc6d14bb33579735c8004466110141
     version: ~
     source:
       Git: "https://git.hipert.unimore.it/gbellocchi/overlay_cluster.git"
@@ -143,24 +143,6 @@ packages:
     dependencies:
       - axi_slice
       - riscv
-  pulp_cluster:
-    revision: 2a5b16d72c08b6a8f73a8731d67aad0408fc54fb
-    version: ~
-    source:
-      Git: "https://github.com/pulp-platform/pulp_cluster.git"
-    dependencies:
-      - axi
-      - axi2mem
-      - axi2per
-      - axi_slice
-      - axi_slice_dc
-      - cluster_interconnect
-      - cluster_peripherals
-      - event_unit_flex
-      - icache_mp_128_pf
-      - per2axi
-      - riscv
-      - timer_unit
   riscv:
     revision: d84cd23a66fef580f0ee980e554432a1d2ecbea3
     version: ~
