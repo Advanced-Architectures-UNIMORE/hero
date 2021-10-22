@@ -2,45 +2,29 @@
 
 ROOT := $(patsubst %/,%, $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
-TEST_FOLDER 	:= $(ROOT)/../test
+# test
+TEST_FOLDER 	:= $(realpath $(ROOT)/../test )
 SLM_FILES 		:= $(TEST_FOLDER)/slm_files
 
-HWACC := mmul_parallel
+# test app
+APP_DIR_OPEN_MP := tests-pulp/api
+APP_DIR_SINGLE_ACC := $(realpath ../deps/hwpe-generated-ex/sw )
+APP_NAME := sw
 
-APP_NAME := hwpe-tests/hwpe-fir
-OPEN_MP_APP := tests-pulp/api
-
-# Modelsim
-VSIM_GUI := false
-
-# Test
-HWPE_REPO := hwpe-generated-ex/sw
-SINGLE_HWACC := ${HWPE_REPO}
-MULTI_HWACC := ${HWPE_REPO}/multi-ip-test 
+# modelsim
+VSIM_GUI := 1
 
 all: clean compile gen_slm sim
 
 sim: 
 	@echo 'Start simulation.'
 	@./start_sim.sh ${VSIM_GUI}
-
-gen_slm_openmp:
-	@echo 'Getting pre-compiled SW stimuli.'
-	@rm -f $(SLM_FILES)/*
-	@$(TEST_FOLDER)/gen_slm_files.sh $(SLM_FILES) $(OPEN_MP_APP) true
-
-gen_slm_accelerator_rich:
-	@echo 'Getting pre-compiled SW stimuli.'
-	@rm -f $(SLM_FILES)/*
-	@$(TEST_FOLDER)/gen_slm_files.sh $(SLM_FILES) $(MULTI_HWACC) false
 	
-gen_slm_hwpe:
-	@echo 'Getting pre-compiled SW stimuli.'
-	@rm -f $(SLM_FILES)/*
-	@$(TEST_FOLDER)/gen_slm_files.sh $(SLM_FILES) $(SINGLE_HWACC) false
+gen_slm:
+	@$(TEST_FOLDER)/gen_slm_files.sh $(APP_DIR_SINGLE_ACC)
 
 compile:
-	@echo 'Compiling hardware.'
+	@echo 'Compiling RTL.'
 	@./compile.sh
 
 clean_lib: clean
@@ -49,8 +33,6 @@ clean_lib: clean
 .PHONY: clean
 clean:
 	@rm -f $(SLM_FILES)/*
-	@rm -f transcript vivado* *.log *.bak
-	@rm -f compile.tcl
-	@rm -f modelsim.ini
-	@rm -rf work
+	@rm -f compile.tcl vsim.wlf modelsim.ini transcript vivado* *.log *.bak
+	@rm -rf work modelsim_libs
 

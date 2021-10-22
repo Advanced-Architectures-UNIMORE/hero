@@ -62,7 +62,7 @@ vsim-pulp:
     - cd hardware
     - make
     - cd vsim
-    - ./compile.sh
+    - make compile
     - $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh insert vsim-pulp
 
 sdk-pulp-and-sdk-har-and-prem:

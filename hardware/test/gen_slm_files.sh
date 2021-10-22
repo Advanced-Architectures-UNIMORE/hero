@@ -2,48 +2,60 @@
 
 set -e
 
-readonly script_path="$( cd "$(dirname "$0")" ; pwd -P )"
+error_exit()
+{
+  echo -e "\n$1\n" 1>&2
+  exit 1
+}
 
-readonly slm_path="$1"
-readonly app_dir="$2"
-readonly OPENMP_APP="$3"
+echo -e "Partition of compiled test application and generation of SLM files\n"
 
-if [ $SLM_CONV_GITHUB ]; then
-    slm_conv="$script_path/slm_conv"
-else
+# test folder
+readonly test_path="$( cd "$(dirname "$0")" ; pwd -P )"
+
+# read arguments from makefile
+readonly app_path="$1"
+
+# useful variables
+readonly dir_slm_files="$test_path/slm_files"
+readonly app_name=$(basename $app_path)
+
+# get slm_conv bin
+if [ -f "$test_path/slm_conv" ]; then
+    slm_conv="$test_path/slm_conv"
+elif [ -f "$test_path/slm_conv-0.3" ]; then
     slm_conv='slm_conv-0.3'
-fi
-
-if ! which $slm_conv &>/dev/null; then
-    slm_conv=~andkurt/bin/slm_conv-0.3
-fi
-declare -r slm_conv
-
-mkdir -p "$slm_path"
-cd "$slm_path"
-
-if $OPENMP_APP; then
-    
-    # Format binary from OpenMP examples.
-    readonly examples_path="$script_path/../../openmp-examples"
-    readonly app_path="$examples_path/$app_dir"
-    readonly app_name=$(basename $app_dir)
-    $slm_conv --swap-endianness -f "$app_path/${app_name}_l1.slm" \
-        -w 32 -P 32 -S 1 -n 2048 -s 0x10000000 -F l1_%01S_%01P.slm
-    $slm_conv --swap-endianness -f "$app_path/${app_name}_l2.slm" \
-        -w 32 -P  4 -S 8 -n 1024 -s 0x1c000000 -F l2_%01S_%01P.slm
-    cp "$app_path/${app_name}.dis" "${app_name}.dis"
-
+elif ! which $slm_conv &>/dev/null; then
+    slm_conv=~/bin/slm_conv-0.3
 else
-
-    # Format binary from HWPE generated examples.
-    readonly deps_path="$script_path/../deps"
-    readonly hwpe_path="$deps_path/$app_dir"
-    readonly app_name=$(basename $app_dir)
-    $slm_conv --swap-endianness -f "$hwpe_path/${app_name}_l1.slm" \
-        -w 32 -P 64 -S 1 -n 1024 -s 0x10000000 -F l1_%01S_%01P.slm
-    $slm_conv --swap-endianness -f "$hwpe_path/${app_name}_l2.slm" \
-        -w 32 -P 4 -S 8 -n 1024 -s 0x1c000000 -F l2_%01S_%01P.slm
-    cp "$hwpe_path/${app_name}.dis" "${app_name}.dis"
-
+    error_exit "No SLM file converter has been found in the test directory. Aborting."
 fi
+
+# clear slm-files of previous simulations
+if [ -d "$dir_slm_files" ]; then
+    rm -f $dir_slm_files/*
+else
+    error_exit "No SLM file directory has been found. Aborting."
+fi
+
+# access directory containing slm-files
+cd $dir_slm_files
+
+# partition L1 binaries for RTL simulation
+if [ -f "$app_path/${app_name}_l1.slm" ]; then
+    $slm_conv --swap-endianness -f "$app_path/${app_name}_l1.slm" \
+    -w 32 -P 64 -S 1 -n 1024 -s 0x10000000 -F l1_%01S_%01P.slm
+else
+    error_exit "Missing L1 binaries at $app_path/. Aborting."
+fi
+
+# partition L2 binaries for RTL simulation
+if [ -f "$app_path/${app_name}_l2.slm" ]; then
+    $slm_conv --swap-endianness -f "$app_path/${app_name}_l2.slm" \
+    -w 32 -P 4 -S 8 -n 1024 -s 0x1c000000 -F l2_%01S_%01P.slm
+else
+    error_exit "Missing L2 binaries at $app_path/. Aborting."
+fi
+
+# local copy of disassembly file
+cp "$app_path/$app_name.dis" "${app_name}.dis"
