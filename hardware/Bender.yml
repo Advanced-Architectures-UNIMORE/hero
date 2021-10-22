@@ -9,7 +9,8 @@ dependencies:
   axi_riscv_atomics: { git: "https://github.com/pulp-platform/axi_riscv_atomics.git", rev: fix-ordering }
   axi_slice_dc: { git: "https://github.com/pulp-platform/axi_slice_dc.git", rev: atomics }
   common_verification: { git: "https://github.com/pulp-platform/common_verification.git", rev: release-0.2 }
-  overlay_cluster: { git: "https://git.hipert.unimore.it/gbellocchi/overlay_cluster.git", rev: master }
+  overlay_cluster: { git: "git@git.hipert.unimore.it:comp4drones/HERO/overlay_cluster.git", rev: single_ip }
+  hwpe-generated-ex: { git: "git@git.hipert.unimore.it:comp4drones/HERO/hwpe-generated-ex.git", rev: verif-gen-mmult-opt-mdc }
 
 workspace:
   checkout_dir: "./deps"

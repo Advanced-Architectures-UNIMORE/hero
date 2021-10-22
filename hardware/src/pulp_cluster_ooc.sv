@@ -171,8 +171,8 @@ module pulp_cluster_ooc (
     .TCDM_SIZE                (pulp_cluster_cfg_pkg::TCDM_SIZE),
     .NB_TCDM_BANKS            (pulp_cluster_cfg_pkg::N_TCDM_BANKS),
     // HWPE
-    .HWPE_PRESENT            (overlay_cluster_hwpe_pkg::HWPE_PRESENT),
-    .NB_HWPE_PORTS           (overlay_cluster_hwpe_pkg::N_HWPE_PORTS),
+    .HWPE_PRESENT             (overlay_cluster_hwpe_pkg::HWPE_PRESENT),
+    .NB_HWPE_PORTS            (overlay_cluster_hwpe_pkg::N_HWPE_PORTS),
     // I$ Parameters
     .NB_CACHE_BANKS           (4),
     .CACHE_SIZE               (pulp_cluster_cfg_pkg::ICACHE_SIZE),
