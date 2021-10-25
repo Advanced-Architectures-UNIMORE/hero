@@ -117,9 +117,9 @@ done
 create_install_app() {
     $PETALINUX_VER petalinux-create --force -t apps --template install -n $1 --enable
     cd project-spec/meta-user/recipes-apps/$1
-    patch <"$THIS_DIR/recipes-apps/$1/${1}.bb.patch"
+    patch <"$ROOT_DIR/recipes-apps/$1/${1}.bb.patch"
     rm -r files
-    cp -r "$THIS_DIR/recipes-apps/$1/files" .
+    cp -r "$ROOT_DIR/recipes-apps/$1/files" .
     cd ->/dev/null
 }
 # Create application that will mount SD card folders on boot.
@@ -127,7 +127,7 @@ create_install_app init-mount
 # Create application that will execute scripts from SD card on boot.
 create_install_app init-exec-scripts
 # Create application to deploy custom `/etc/sysctl.conf`.
-cp "$HERO_ROOT/board/common/overlay/etc/sysctl.conf" "$THIS_DIR/recipes-apps/sysctl-conf/files/"
+cp "$HERO_ROOT/board/common/overlay/etc/sysctl.conf" "$ROOT_DIR/recipes-apps/sysctl-conf/files/"
 create_install_app sysctl-conf
 
 # Build PetaLinux.

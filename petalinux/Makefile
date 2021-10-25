@@ -1,4 +1,6 @@
-# Author: Gianluca Bellocchi <gianluca.bellocchi@unimore.it>
+########################################################
+## Gianluca Bellocchi <gianluca.bellocchi@unimore.it> ##
+########################################################
 
 ROOT 			:= $(patsubst %/,%, $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
@@ -8,16 +10,44 @@ TARGET_HW 		:= BR2_HERO_BITSTREAM
 
 # directories
 SCRIPTS_DIR		:= $(ROOT)/scripts
+OUT_DIR			:= $(ROOT)/output
 
 .PHONY: clean
 
-update_output:
-	@rm -rf $(ROOT)/output/*
+# ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ #
+
+# ------- #
+#  BOARD  #
+# ------- #
+
+reboot_zcu102:
+	@$(SCRIPTS_DIR)/reboot_zcu102.sh
+
+update_image:
+	@$(SCRIPTS_DIR)/update_image.sh \
+		$(ROOT) # input parameters
+
+update_bitstream:
+	@$(SCRIPTS_DIR)/update_bitstream.sh \
+		$(TARGET_HW) $(ROOT) # input parameters
+
+# ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ #
+
+# ------------------------- #
+#  BUILD LINUX ENVIRONMENT  #
+# ------------------------- #
+
+update_output: clean_output
 	@cp -r $(ROOT)/$(TARGET_BOARD)/images/linux/* $(ROOT)/output
 
-build_petalinux:
+build_petalinux: clean_petalinux
 	@$(SCRIPTS_DIR)/$(TARGET_BOARD).sh \
 		$(TARGET_BOARD) $(TARGET_HW) $(ROOT) # input parameters
 
-clean:
+clean_petalinux:
 	@rm -rf $(TARGET_BOARD)
+
+clean_output:
+	@rm -rf $(OUT_DIR)/*
+
+# ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ #
