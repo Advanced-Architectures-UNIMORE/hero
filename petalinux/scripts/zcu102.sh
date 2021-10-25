@@ -1,18 +1,29 @@
 #!/usr/bin/env bash
-readonly THIS_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
-readonly HERO_ROOT="$(readlink -f "$THIS_DIR/..")"
+
+# Read input arguments.
+readonly TARGET_BOARD="$1"
+readonly TARGET_HW="$2"
+readonly ROOT_DIR="$3"
+
+# Print some user information about input parameters
+echo -e "Building Petalinux project for...\n"
+echo -e ">> Target board: $TARGET_BOARD"
+echo -e ">> Target hardware: $TARGET_HW\n"
+
+readonly HERO_ROOT="$HERO_HOME_DIR"
 readonly LOCAL_CFG="$HERO_ROOT/local.cfg"
 
 set -e
 
 # Change working directory to path of script, so this script can be executed from anywhere.
-cd "$THIS_DIR"
+cd "$ROOT_DIR"
+
 # Resolve symlinks.
 cd "$(pwd -P)"
 
 # Obtain bitstream path from configuration.
 set +e
-bitstream="$("$HERO_ROOT/util/configfile/get_value" -s "$LOCAL_CFG" BR2_HERO_BITSTREAM \
+bitstream="$("$HERO_ROOT/util/configfile/get_value" -s "$LOCAL_CFG" "$TARGET_HW" \
     | tr -d '"')";
 if test "$?" -ne 0; then
   >&2 echo "Error: '$1' is not defined in '$LOCAL_CFG'!"
@@ -24,13 +35,18 @@ if ! test -r "$bitstream"; then
   echo "Error: Path to bitstream ('$bitstream') is not readable!"
   exit 1
 fi
+BITSTREAM_DIR=$(dirname "$bitstream")
+
+# Print some user information about the target hw
+echo -e "Recovering bitstream information...\n"
+echo -e ">> Target bitstream path: $bitstream"
 
 # Initialize Python environment suitable for PetaLinux.
 python3.6 -m venv .venv
 ln -sf python3.6 .venv/bin/python3
 source .venv/bin/activate
 
-if $NO_IIS; then
+if [ "$NO_IIS" -eq 1 ]; then
   PETALINUX_VER=''
 else
   if [ -z "$PETALINUX_VER" ]; then
@@ -38,16 +54,15 @@ else
   fi
 fi
 readonly PETALINUX_VER
-readonly TARGET=zcu102
 
 # create project
-if [ ! -d "$TARGET" ]; then
-    $PETALINUX_VER petalinux-create -t project -n "$TARGET" --template zynqMP
+if [ ! -d "$TARGET_BOARD" ]; then
+    $PETALINUX_VER petalinux-create -t project -n "$TARGET_BOARD" --template zynqMP
 fi
-cd "$TARGET"
+cd "$TARGET_BOARD"
 
 # initialize and set necessary configuration from config and local config
-$PETALINUX_VER petalinux-config --oldconfig --get-hw-description "$HERO_ROOT/hardware/fpga/hero_exil$TARGET/hero_exil$TARGET.sdk"
+$PETALINUX_VER petalinux-config --oldconfig --get-hw-description "$BITSTREAM_DIR"
 
 mkdir -p components/ext_sources
 cd components/ext_sources
@@ -70,7 +85,7 @@ if [ -f "$LOCAL_CFG" ] && grep -q PT_ETH_MAC "$LOCAL_CFG"; then
     sed -e 's/PT_ETH_MAC/CONFIG_SUBSYSTEM_ETHERNET_PSU_ETHERNET_3_MAC/;t;d' "$LOCAL_CFG" >> project-spec/configs/config
 fi
 
-$PETALINUX_VER petalinux-config --oldconfig --get-hw-description "$HERO_ROOT/hardware/fpga/hero_exil$TARGET/hero_exil$TARGET.sdk"
+$PETALINUX_VER petalinux-config --oldconfig --get-hw-description "$BITSTREAM_DIR"
 
 echo "
 /include/ \"system-conf.dtsi\"
@@ -132,21 +147,21 @@ if [ ! -f regs.init ]; then
 fi
 
 # Generate images including bitstream with `petalinux-package`.
-cp "$bitstream" hero_exil${TARGET}_wrapper.bit
+cp "$bitstream" hero_exil${TARGET_BOARD}_wrapper.bit
 echo "
 the_ROM_image:
 {
   [init] regs.init
   [bootloader] zynqmp_fsbl.elf
   [pmufw_image] pmufw.elf
-  [destination_device=pl] hero_exil${TARGET}_wrapper.bit
+  [destination_device=pl] hero_exil${TARGET_BOARD}_wrapper.bit
   [destination_cpu=a53-0, exception_level=el-3, trustzone] bl31.elf
   [destination_cpu=a53-0, exception_level=el-2] u-boot.elf
 }
-" > bootgen.bif
+# " > bootgen.bif
 $PETALINUX_VER petalinux-package --boot --force \
   --fsbl zynqmp_fsbl.elf \
-  --fpga hero_exil${TARGET}_wrapper.bit \
+  --fpga hero_exil${TARGET_BOARD}_wrapper.bit \
   --u-boot u-boot.elf \
   --pmufw pmufw.elf \
   --bif bootgen.bif
