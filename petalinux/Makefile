@@ -23,13 +23,13 @@ OUT_DIR			:= $(ROOT)/output
 reboot_zcu102:
 	@$(SCRIPTS_DIR)/reboot_zcu102.sh
 
-update_image:
-	@$(SCRIPTS_DIR)/update_image.sh \
-		$(ROOT) # input parameters
+update_boardenv:
+	@$(SCRIPTS_DIR)/update_boardenv.sh \
+		$(TARGET_BOARD) $(TARGET_HW) $(ROOT) # input parameters
 
 update_bitstream:
 	@$(SCRIPTS_DIR)/update_bitstream.sh \
-		$(TARGET_HW) $(ROOT) # input parameters
+		$(TARGET_BOARD) $(TARGET_HW) $(ROOT) # input parameters
 
 # ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ #
 
@@ -38,7 +38,10 @@ update_bitstream:
 # ------------------------- #
 
 update_output: clean_output
-	@cp -r $(ROOT)/$(TARGET_BOARD)/images/linux/* $(ROOT)/output
+	@mkdir $(OUT_DIR)/$(TARGET_BOARD)
+	@cp $(TARGET_BOARD)/config.project $(OUT_DIR)/$(TARGET_BOARD)/
+	@cp -r $(TARGET_BOARD)/.petalinux/ $(OUT_DIR)/$(TARGET_BOARD)/
+	@cp -r $(ROOT)/$(TARGET_BOARD)/images $(OUT_DIR)/$(TARGET_BOARD)
 
 build_petalinux: clean_petalinux
 	@$(SCRIPTS_DIR)/$(TARGET_BOARD).sh \

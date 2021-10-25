@@ -21,6 +21,11 @@ else
 fi
 
 # load pulp driver
-# ssh $HERO_TARGET_HOST "mkdir /lib/modules/4.19.0/extra"
-# scp $HERO_HOME_DIR/output/br-har-exilzcu102/target/usr/lib/libhero-target.so $HERO_TARGET_HOST:/lib/modules/4.19.0/extra
-# insmod /mnt/lib/modules/4.19.0/extra/pulp.ko
+if [ -n "$HERO_TARGET_HOST" ]; then
+    ssh $HERO_TARGET_HOST "mkdir /lib/modules/4.19.0/extra"
+    scp $HERO_HOME_DIR/output/br-har-exilzcu102/target/lib/modules/4.19.0/extra/pulp.ko $HERO_TARGET_HOST:/lib/modules/4.19.0/extra
+    ssh $HERO_TARGET_HOST "rmmod -f pulp"
+    ssh $HERO_TARGET_HOST "insmod /lib/modules/4.19.0/extra/pulp.ko"
+else
+    error_exit "HERO_TARGET_HOST is not defined. Aborting."
+fi

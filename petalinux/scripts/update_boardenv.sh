@@ -7,17 +7,20 @@ error_exit()
 }
 
 # Read input arguments.
-readonly ROOT_DIR="$1"
+readonly TARGET_BOARD="$1"
+readonly TARGET_HW="$2"
+readonly ROOT_DIR="$3"
 
 # Print some user information about input parameters
 echo -e "Building Petalinux project for...\n"
+echo -e ">> Target board: $TARGET_BOARD"
+echo -e ">> Target hardware: $TARGET_HW\n"
 
 readonly HERO_ROOT="$HERO_HOME_DIR"
 readonly LOCAL_CFG="$HERO_ROOT/local.cfg"
-readonly OUT_DIR="$ROOT_DIR/output"
 
 # Move to images directory
-cd $OUT_DIR
+cd "$TARGET_BOARD/images/linux"
 
 # Copy new image
 if [ -n "$HERO_TARGET_HOST" ]; then

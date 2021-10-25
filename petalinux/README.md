@@ -22,7 +22,7 @@ make update_output
 If the user needs to update the running Linux environment with a new bitstream, or  new Linux image, the following commands are exploitable:
 ```sh
 make update_bitstream				# To update the hardware bitstream on the board.
-make update_image					# to update the Linux image on the board.
+make update_boardenv				# To update the Linux image on the board.
 ```
 
 Once new files are exported, the board can be re-booted with `make reboot_zcu102`. Other than re-booting the system, the invoked script also update the HERO libraries and the PULP driver. The latters can be built in the `$HERO_HOME_DIR/support` directory.
