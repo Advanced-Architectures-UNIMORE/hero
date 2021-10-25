@@ -116,7 +116,8 @@ First, add a line to the `local.cfg` file at the root of your repository (create
 ```
 BR2_HERO_BITSTREAM=/absolute/path/to/hero_exilzcu102_wrapper.bit
 ```
-Then, generate the SD card image files with
+
+There exist many different booting strategies that can be employed. The standard one is to generate the SD card image files with:
 ```
 make br-har-exilzcu102
 ```
@@ -129,7 +130,23 @@ This creates an SD card image from the Buildroot filesystem and additionally inv
 2. Format the first partition with `vfat` and the second partition with `ext4`.
 3. Mount the first partition, copy `BOOT.BIN` and `image.ub` from `output/br-har-exilzcu102/images/` to the mounted partition, and unmount it.
 
-The system can then be booted up after configuring the ZCU102 board jumpers to boot from the SD card.  The root filesystem mounted after boot is provided by PetaLinux.  It is loaded into memory during boot, and changes are not persisted to the SD card.  Furthermore, that root filesystem does not include the HERO libraries.  A persistent filesystem, which includes the HERO libraries, resides on the second partition of the SD card.  We recommend mounting it at `/mnt`
+The system can then be booted up after configuring the ZCU102 board jumpers to boot from the SD card.  The root filesystem mounted after boot is provided by PetaLinux.  It is loaded into memory during boot, and changes are not persisted to the SD card.  
+
+Furthermore, that root filesystem does not include the HERO libraries. To compile the latters, move to the '$HERO_HOME_DIR/support/libhero-target' and run the build process:
+
+```
+make build
+```
+
+Before to install the library binary to the board, you have to set the environment variable to describe the target host:
+
+```
+export HERO_TARGET_HOST=<your_root> (e.g. root@hero-zcu102)
+``` 
+
+Then you can run 'make install'. This command will basically copy the library binary through SSH.
+
+A persistent filesystem, which includes the HERO libraries, resides on the second partition of the SD card.  We recommend mounting it at `/mnt`
 ```sh
 mount /dev/mmcblk0p2 /mnt
 ```
@@ -145,7 +162,7 @@ scp output/br-har-exilzcu102/images/{BOOT.BIN,image.ub} root@zcu102-hostname:/ru
 ssh root@zcu102-hostname /sbin/reboot
 ```
 
-To develop applications for this setup, the dynamic environment on the development machine can be loaded using `source env/exilzcu102.sh`. Afterwards applications can be built and transferred directly to the board.
+To develop applications for this setup, the dynamic environment on the development machine can be loaded using `source env/exilzcu102.sh`. Afterwards applications can be built and transferred directly to the board. Some examples are inserted in the 'openmp-examples' directory.
 
 ##### QEMU RISC-V
 For host debugging it can be useful to test the environment first with the QEMU machine emulator. A clone of the RISC-V Ariane environment without specific hardware patches and including virtual drivers can be built with:
