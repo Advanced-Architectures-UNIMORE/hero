@@ -9,7 +9,13 @@ VIVADO := vitis-2019.2 vivado
 VIVADO_OPT :=-mode batch
 
 DESIGN_NAME := hero_exilzcu102
-DESIGN_LOCATION := ${GBELLOCCHI_SCRATCH2}/design_fpga
+
+ifeq ($(UNIMORE),)
+	DESIGN_LOCATION := .
+endif
+ifeq ($(IIS),)
+	DESIGN_LOCATION := ${GBELLOCCHI_SCRATCH2}/design_fpga
+endif
 
 .PHONY: all
 all: hero_exilzcu102

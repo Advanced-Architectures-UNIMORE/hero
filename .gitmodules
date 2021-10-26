@@ -26,3 +26,6 @@
 [submodule "hardware/test/slm_conv"]
 	path = hardware/test/slm_conv
 	url = git@github.com:accuminium/slm_conv.git
+[submodule "genov"]
+	path = genov
+	url = git@iis-git.ee.ethz.ch:gianluca.bellocchi/genov.git

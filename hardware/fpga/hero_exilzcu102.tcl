@@ -7,7 +7,6 @@ set vivado_dir [lindex $argv 1]
 set prj_dir "$vivado_dir/$design_name"
 puts "Vivado project is going to be located in $prj_dir\."
 
-
 create_project hero_exilzcu102 ./hero_exilzcu102 -part xczu9eg-ffvb1156-2-e
 set_property board_part xilinx.com:zcu102:part0:3.3 [current_project]
 set_property ip_repo_paths ./vivado_ips [current_project]

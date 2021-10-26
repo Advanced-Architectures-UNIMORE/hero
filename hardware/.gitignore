@@ -2,3 +2,5 @@
 /bender
 /component.xml
 /xgui
+
+/src/ov_acc_pkg.sv
