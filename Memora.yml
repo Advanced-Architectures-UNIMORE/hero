@@ -781,15 +781,15 @@ artifacts:
   vsim-pulp:
     inputs:
       - .gitlab-ci.yml
-      - hardware/Bender.lock
-      - hardware/Bender.yml
-      - hardware/Makefile
-      - hardware/deps
-      - hardware/src
-      - hardware/test
-      - hardware/vsim
+      - genov/Bender.lock
+      - genov/Bender.yml
+      - genov/Makefile
+      - genov/deps
+      - genov/src
+      - genov/test
+      - genov/vsim
     outputs:
-      - hardware/vsim/work
+      - genov/vsim/work
 
   sdk-pulp-and-sdk-har:
     inputs:
@@ -2161,15 +2161,15 @@ artifacts:
 
   bitstream-zcu102:
     inputs:
-      - hardware/Bender.lock
-      - hardware/Bender.yml
-      - hardware/Makefile
-      - hardware/deps
-      - hardware/fpga
-      - hardware/src
+      - genov/Bender.lock
+      - genov/Bender.yml
+      - genov/Makefile
+      - genov/deps
+      - genov/fpga
+      - genov/src
     outputs:
-      - hardware/fpga/hero_exilzcu102/hero_exilzcu102.runs/impl_1/hero_exilzcu102_wrapper.bit
-      - hardware/fpga/hero_exilzcu102/hero_exilzcu102.sdk/hero_exilzcu102_wrapper.hdf
+      - genov/fpga/hero_exilzcu102/hero_exilzcu102.runs/impl_1/hero_exilzcu102_wrapper.bit
+      - genov/fpga/hero_exilzcu102/hero_exilzcu102.sdk/hero_exilzcu102_wrapper.hdf
 
   br-har-exilzcu102:
     inputs:
@@ -2188,12 +2188,12 @@ artifacts:
       - pulp
       ## Dependencies
       # bitstream-zcu102
-      - hardware/Bender.lock
-      - hardware/Bender.yml
-      - hardware/Makefile
-      - hardware/deps
-      - hardware/fpga
-      - hardware/src
+      - genov/Bender.lock
+      - genov/Bender.yml
+      - genov/Makefile
+      - genov/deps
+      - genov/fpga
+      - genov/src
       # tc-har-olinux
       - Makefile
       - toolchain/build.sh
@@ -2225,12 +2225,12 @@ artifacts:
       - pulp
       ## Dependencies
       # bitstream-zcu102
-      - hardware/Bender.lock
-      - hardware/Bender.yml
-      - hardware/Makefile
-      - hardware/deps
-      - hardware/fpga
-      - hardware/src
+      - genov/Bender.lock
+      - genov/Bender.yml
+      - genov/Makefile
+      - genov/deps
+      - genov/fpga
+      - genov/src
       # tc-har-olinux
       - Makefile
       - toolchain/build.sh

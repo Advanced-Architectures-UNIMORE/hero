@@ -44,7 +44,7 @@ make sdk-pulp
 make sdk-har
 make tc-llvm
 .gitlab-ci.d/memora_retry.sh get bitstream-zcu102 # use bitstream from CI, since it is well isolated
-echo "BR2_HERO_BITSTREAM=$(pwd)/hardware/fpga/hero_exilzcu102/hero_exilzcu102.runs/impl_1/hero_exilzcu102_wrapper.bit" > local.cfg
+echo "BR2_HERO_BITSTREAM=$(pwd)/genov/fpga/hero_exilzcu102/hero_exilzcu102.runs/impl_1/hero_exilzcu102_wrapper.bit" > local.cfg
 make br-har-exilzcu102
 
 # Deploy build artifacts to board and reboot it.
