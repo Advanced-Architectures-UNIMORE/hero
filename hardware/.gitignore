@@ -4,3 +4,7 @@
 /xgui
 
 /src/ov_acc_pkg.sv
+
+hardware/deps/hwpe-generated-ex/
+hardware/deps/overlay_cluster/
+hardware/test/slm_conv
