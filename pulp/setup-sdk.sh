@@ -1,24 +1,40 @@
 #!/usr/bin/env bash
 
+# set local vars
+pulp_chip=${1}
+THIS_DIR=$(dirname "$(readlink -f "$0")")
+
+# read target overlay device (set in local.cfg in HERO root directory)
+# this can either overlay or not with hero-urania
+hero_root_dir="${THIS_DIR}/.."
+hero_config_file=${hero_root_dir}/local.cfg # HERO Config File
+eval ov_cfg_device=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | tr -d '"')
+if [ -z "${ov_cfg_device}" ]; then
+    echo "ERROR: please set OV_CFG_DEV in local.cfg file"
+else
+    echo "Building SDK for target '${ov_cfg_device}'"
+fi
+
+# set env vars
+export PULP_RISCV_GCC_TOOLCHAIN=$HERO_INSTALL
+
 # Initialize environment
 set -e
-if [ -z "$HERO_INSTALL" ]; then
+if [ -z "${HERO_INSTALL}" ]; then
   echo "Fatal error: The 'HERO_INSTALL' environment variable is not defined!"
   exit 1
 fi
-THIS_DIR=$(dirname "$(readlink -f "$0")")
 if [ "$#" -ne 1 ]; then
     echo 'Fatal: expects a single argument'
     exit 1
 fi
-if [ ! -f "${THIS_DIR}/sdk/configs/${1}.sh" ]; then
+if [ ! -f "${THIS_DIR}/sdk/configs/${pulp_chip}.sh" ]; then
     echo "Fatal: Config for PULP chip '$1' does not exist"
     exit 1
 fi
-export PULP_RISCV_GCC_TOOLCHAIN=$HERO_INSTALL
 cd ${THIS_DIR}/sdk
-pulp_chip=${1}
-source configs/${1}.sh
+
+source configs/${pulp_chip}.sh
 source configs/platform-hsa.sh
 
 # checkout packages
@@ -57,20 +73,11 @@ plpbuild --g runtime build --stdout
 plpbuild --g pkg build
 make env
 
-# Install hero config objects files
-cd ${THIS_DIR}
-source ${THIS_DIR}/sdk/sourceme.sh
-mkdir -p ${PULP_SDK_HOME}/install/hero/${pulp_chip}
-$HERO_INSTALL/bin/riscv32-unknown-elf-gcc -Wextra -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wundef -fdata-sections -ffunction-sections -I${PULP_SDK_INSTALL}/include/io -I${PULP_SDK_INSTALL}/include -march=rv32imcxpulpv2 -D__riscv__ -include refs/${pulp_chip}/cl_config.h -c refs/rt_conf.c -o ${PULP_SDK_HOME}/install/hero/${pulp_chip}/rt_conf.o
-cp -r refs/* ${PULP_SDK_HOME}/install/hero/
-
-# Create symlink from current config to hero-sim
-# FIXME: remove the special logic for hero-sim after unifying this further
-ln -sf ${pulp_chip} ${PULP_SDK_HOME}/install/lib/hero-sim
-ln -sf ../${pulp_chip}/rt_conf.o ${PULP_SDK_HOME}/install/hero/hero-sim/
-
 # Build libhero-target
 make -C "${THIS_DIR}/../support/libhero-target/pulp" header build install
 
 # Build libpremnotify for PULP
 ${THIS_DIR}/setup-libprem-pulp.sh "${THIS_DIR}/.."
+
+# Create ad-hoc library for overlay instance
+mv ${PULP_SDK_HOME}/install/lib/${pulp_chip} ${PULP_SDK_HOME}/install/lib/${ov_cfg_device}
