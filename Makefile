@@ -110,7 +110,7 @@ tc-llvm-debug: check_environment
 
 sdk-pulp-hrv: check_environment
 	$(ROOT)/pulp/setup-sdk.sh hero-urania
-sdk-pulp: sdk-pulp-hrv
+sdk-pulp: sdk-pulp-hrv sdk-ov-libs
 
 sdk-pulp-har: check_environment
 	$(ROOT)/pulp/setup-sdk.sh hero-arm64
@@ -120,6 +120,9 @@ sdk-hrv: check_environment br-hrv
 
 sdk-har: check_environment br-har
 	cd $(CURDIR)/output/br-har && $(ROOT)/toolchain/install-sdk.sh
+
+sdk-ov-libs:
+	$(ROOT)/pulp/setup-ov-libs.sh hero-urania
 
 # Utilities
 .PHONY: util-hrv-openocd
