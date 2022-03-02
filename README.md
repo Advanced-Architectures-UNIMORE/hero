@@ -70,6 +70,11 @@ The PULP SDK is required to build applications for PULP. This has to be set up b
 make sdk-pulp
 ```
 
+To create different SDK setups for different instances of the overlay device is possible. A line with value `OV_CFG_DEV="<target-overlay-instance>"` should be added to a file `local.cfg` in the root repository. hen, the SDK should be rebuilt using the `make sdk-pulp` command. At this point, the installation of the appication-specific libraries (e.g. HWPE) dealing with <target-overlay-instance> will be installed under specific paths under `${PULP_SDK_HOME}/install/`.
+
+When swapping overlay instance, the line in `local.cfg` can be updated with a new with <target-overlay-instance>. Then launching `make sdk-ov-libs` updates the SDK configuration to re-target the corresponding appication-specific libraries.
+
+
 ### Host SDKs
 Host Software Development Kits (SDKs) for both RISC-V and ARMv8 are necessary for the infrastructure of further build steps, for the development of heterogeneous applications, and for development on the HERO software stack itself. The SDKs are generated using Buildroot and installed to the `HERO_INSTALL` directory. These SDKs can be built as follows:
 ```

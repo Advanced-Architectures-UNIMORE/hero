@@ -32,6 +32,27 @@ if [ ! -f "${THIS_DIR}/sdk/configs/${pulp_chip}.sh" ]; then
     echo "Fatal: Config for PULP chip '$1' does not exist"
     exit 1
 fi
+
+# Unlink symbolic link under installed dev
+link=${PULP_SDK_HOME}/install/include
+if [ -L ${link} ]; then
+    if [ -e ${link} ]; then
+        unlink ${link}
+    fi
+fi
+link=${PULP_SDK_HOME}/install/lib/${pulp_chip}
+if [ -L ${link} ]; then
+    if [ -e ${link} ]; then
+        unlink ${link}
+    fi
+fi
+link=${PULP_SDK_HOME}/install/lib/hero-sim
+if [ -L ${link} ]; then
+    if [ -e ${link} ]; then
+        unlink ${link}
+    fi
+fi
+
 cd ${THIS_DIR}/sdk
 
 source configs/${pulp_chip}.sh
@@ -79,5 +100,23 @@ make -C "${THIS_DIR}/../support/libhero-target/pulp" header build install
 # Build libpremnotify for PULP
 ${THIS_DIR}/setup-libprem-pulp.sh "${THIS_DIR}/.."
 
+# Create ad-hoc header include for overlay instance
+mkdir -p ${PULP_SDK_HOME}/install/headers/
+src=${PULP_SDK_HOME}/install/include
+dst=${PULP_SDK_HOME}/install/headers/${ov_cfg_device}
+if [ ! -d ${dst} ]; then
+    mv ${src} ${dst}
+else
+    rm -rf ${dst}
+    mv ${src} ${dst}
+fi
+
 # Create ad-hoc library for overlay instance
-mv ${PULP_SDK_HOME}/install/lib/${pulp_chip} ${PULP_SDK_HOME}/install/lib/${ov_cfg_device}
+src=${PULP_SDK_HOME}/install/lib/${pulp_chip}
+dst=${PULP_SDK_HOME}/install/lib/${ov_cfg_device}
+if [ ! -d ${dst} ]; then
+    mv ${src} ${dst}
+else
+    rm -rf ${dst}
+    mv ${src} ${dst}
+fi
