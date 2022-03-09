@@ -1,12 +1,27 @@
-########################################################
-## Gianluca Bellocchi <gianluca.bellocchi@unimore.it> ##
-########################################################
+# =====================================================================
+# Project:      HERO
+# Title:        Makefile
+# Description:  Define operations compliant with compilation of Petalinux 
+#				image for HERO.
+#
+# $Date:        9.03.2022
+# =====================================================================
+#
+# Copyright (C) 2022 University of Modena and Reggio Emilia.
+#
+# Author: Gianluca Bellocchi, University of Modena and Reggio Emilia.
+#
+# =====================================================================
 
 ROOT 			:= $(patsubst %/,%, $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 # user parameters
-TARGET_BOARD 	:= zcu102
-TARGET_HW 		:= BR2_HERO_BITSTREAM
+TARGET_BOARD 		:= zcu102
+TARGET_NAME			:= OV_CFG_DEV
+TARGET_BITSTREAM 	:= BR2_HERO_BITSTREAM
+
+# project
+BUILD_DIR		:= ${GBELLOCCHI_SCRATCH2}/ethz/petalinux
 
 # directories
 SCRIPTS_DIR		:= $(ROOT)/scripts
@@ -20,16 +35,30 @@ OUT_DIR			:= $(ROOT)/output
 #  BOARD  #
 # ------- #
 
+# Procedure to offline/online update of board projects:
+#
+# 1) update_bitstream (offline) ~ retrieve new bitstream and re-compile project outputs.
+#
+# 2) update_output (offline) ~ collect project binaries, divided per project.
+#
+# 3) update_boardenv (online) ~ copy new images to board.
+#
+# 4) reboot_zcu102 (online) ~ reboot board.
+
 reboot_zcu102:
 	@$(SCRIPTS_DIR)/reboot_zcu102.sh
 
 update_boardenv:
 	@$(SCRIPTS_DIR)/update_boardenv.sh \
-		$(TARGET_BOARD) $(TARGET_HW) $(ROOT) # input parameters
+		$(TARGET_BOARD) $(TARGET_NAME) ${OUT_DIR}
+
+update_output: clean_output
+	@$(SCRIPTS_DIR)/$@.sh \
+		$(TARGET_BOARD) $(TARGET_NAME) ${BUILD_DIR} ${OUT_DIR}
 
 update_bitstream:
-	@$(SCRIPTS_DIR)/update_bitstream.sh \
-		$(TARGET_BOARD) $(TARGET_HW) $(ROOT) # input parameters
+	@$(SCRIPTS_DIR)/$@.sh \
+		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${ROOT} ${BUILD_DIR}
 
 # ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ #
 
@@ -37,18 +66,9 @@ update_bitstream:
 #  BUILD LINUX ENVIRONMENT  #
 # ------------------------- #
 
-update_output: clean_output
-	@mkdir $(OUT_DIR)/$(TARGET_BOARD)
-	@cp $(TARGET_BOARD)/config.project $(OUT_DIR)/$(TARGET_BOARD)/
-	@cp -r $(TARGET_BOARD)/.petalinux/ $(OUT_DIR)/$(TARGET_BOARD)/
-	@cp -r $(ROOT)/$(TARGET_BOARD)/images $(OUT_DIR)/$(TARGET_BOARD)
-
-build_petalinux: clean_petalinux
+build_petalinux:
 	@$(SCRIPTS_DIR)/$(TARGET_BOARD).sh \
-		$(TARGET_BOARD) $(TARGET_HW) $(ROOT) # input parameters
-
-clean_petalinux:
-	@rm -rf $(TARGET_BOARD)
+		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${ROOT} ${BUILD_DIR}
 
 clean_output:
 	@rm -rf $(OUT_DIR)/*
