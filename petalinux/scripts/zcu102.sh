@@ -92,7 +92,7 @@ readonly PETALINUX_VER
 cd $BUILD_DIR
 
 # create project
-PETALINUX_PRJ_NAME=$TARGET_BOARD-$ov_cfg_device
+PETALINUX_PRJ_NAME=$TARGET_BOARD
 if [ ! -d "$TARGET_BOARD" ]; then
     $PETALINUX_VER petalinux-create -t project -n "$PETALINUX_PRJ_NAME" --template zynqMP
 fi
@@ -104,7 +104,7 @@ $PETALINUX_VER petalinux-config --oldconfig --get-hw-description "$BITSTREAM_DIR
 mkdir -p components/ext_sources
 cd components/ext_sources
 if [ ! -d "linux-xlnx" ]; then
-    git clone --depth 1 --single-branch --branch xilinx-v2019.2.01 git://github.com/Xilinx/linux-xlnx.git
+    git clone --depth 1 --single-branch --branch xilinx-v2019.2.01 git@github.com:Xilinx/linux-xlnx.git # git://github.com/Xilinx/linux-xlnx.git
 fi
 cd linux-xlnx
 git checkout tags/xilinx-v2019.2.01

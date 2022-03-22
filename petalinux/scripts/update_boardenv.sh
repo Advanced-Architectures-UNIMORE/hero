@@ -49,7 +49,7 @@ fi
 echo -e "\nConfiguration settings...\n"
 echo -e ">> Overlay instance name: $ov_cfg_device"
 
-PETALINUX_PRJ_NAME=$TARGET_BOARD-$ov_cfg_device
+PETALINUX_PRJ_NAME=$TARGET_BOARD 
 
 # Copy new image
 if [ -n "$HERO_TARGET_HOST" ]; then

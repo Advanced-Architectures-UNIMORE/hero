@@ -63,7 +63,7 @@ echo -e ">> Overlay instance name: $ov_cfg_device"
 echo -e ">> Bitstream location: $bitstream"
 
 # retrieve project name
-PETALINUX_PRJ_NAME=$TARGET_BOARD-$ov_cfg_device
+PETALINUX_PRJ_NAME=$TARGET_BOARD 
 
 # move to project location 
 cd "$BUILD_DIR/$PETALINUX_PRJ_NAME/images/linux"

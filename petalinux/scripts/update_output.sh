@@ -45,7 +45,7 @@ fi
 echo -e "\nConfiguration settings...\n"
 echo -e ">> Overlay instance name: $ov_cfg_device"
 
-PETALINUX_PRJ_NAME=$TARGET_BOARD-$ov_cfg_device
+PETALINUX_PRJ_NAME=$TARGET_BOARD
 
 if [ -d "$OUT_DIR/$PETALINUX_PRJ_NAME" ]; then
   echo -e "\nOutput files already exist for project '$PETALINUX_PRJ_NAME'"
