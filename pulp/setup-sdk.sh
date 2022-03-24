@@ -1,25 +1,35 @@
+# =====================================================================
+# Project:      PULP SDK
+# Title:        setup-sdk.sh
+# Description:  Setup SDK and compile the PULP runtime libraries.
+#
+# $Date:        24.3.2022
+# =====================================================================
+#
+# Authors: 
+#   - Andreas Kurth, ETHZ.
+#   - Gianluca Bellocchi, University of Modena and Reggio Emilia.
+#
+# =====================================================================
+
 #!/usr/bin/env bash
+
+# ------------------------------------------------------------------------------------- #
+
+# ============== #
+# Initialization #
+# ============== #
 
 # set local vars
 pulp_chip=${1}
 THIS_DIR=$(dirname "$(readlink -f "$0")")
 
-# read target overlay device (set in local.cfg in HERO root directory)
-# this can either overlay or not with hero-urania
-hero_root_dir="${THIS_DIR}/.."
-hero_config_file=${hero_root_dir}/local.cfg # HERO Config File
-eval ov_cfg_device=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | tr -d '"')
-if [ -z "${ov_cfg_device}" ]; then
-    echo "ERROR: please set OV_CFG_DEV in local.cfg file"
-else
-    echo "Building SDK for target '${ov_cfg_device}'"
-fi
-
-# set env vars
-export PULP_RISCV_GCC_TOOLCHAIN=$HERO_INSTALL
-
-# Initialize environment
+# check environment
 set -e
+if [ -z "${PULP_SDK_HOME}" ]; then
+  echo "Fatal error: The 'PULP_SDK_HOME' environment variable is not defined!"
+  exit 1
+fi
 if [ -z "${HERO_INSTALL}" ]; then
   echo "Fatal error: The 'HERO_INSTALL' environment variable is not defined!"
   exit 1
@@ -33,25 +43,31 @@ if [ ! -f "${THIS_DIR}/sdk/configs/${pulp_chip}.sh" ]; then
     exit 1
 fi
 
-# Unlink symbolic link under installed dev
-link=${PULP_SDK_HOME}/install/include
-if [ -L ${link} ]; then
-    if [ -e ${link} ]; then
-        unlink ${link}
-    fi
+# read target overlay device (set in local.cfg in HERO root directory)
+# this can either overlay or not with hero-urania
+hero_root_dir="${THIS_DIR}/.."
+hero_config_file=${hero_root_dir}/local.cfg # HERO Config File
+eval ov_cfg_device=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | tr -d '"')
+if [ -z "${ov_cfg_device}" ]; then
+    echo "ERROR: please set OV_CFG_DEV in local.cfg file"
+else
+    echo -e ""
+    echo "# ====================================================================="
+    echo "#"
+    echo "# Setup of SDK profile for target '${ov_cfg_device}'"
+    echo "#"
+    echo "# ====================================================================="
+    echo -e ""
 fi
-link=${PULP_SDK_HOME}/install/lib/${pulp_chip}
-if [ -L ${link} ]; then
-    if [ -e ${link} ]; then
-        unlink ${link}
-    fi
-fi
-link=${PULP_SDK_HOME}/install/lib/hero-sim
-if [ -L ${link} ]; then
-    if [ -e ${link} ]; then
-        unlink ${link}
-    fi
-fi
+
+# set env vars
+export PULP_RISCV_GCC_TOOLCHAIN=$HERO_INSTALL
+
+# ------------------------------------------------------------------------------------- #
+
+# ============================== #
+# Compile PULP runtime libraries #
+# ============================== #
 
 cd ${THIS_DIR}/sdk
 
@@ -94,11 +110,11 @@ plpbuild --g runtime build --stdout
 plpbuild --g pkg build
 make env
 
-# Build libhero-target
-make -C "${THIS_DIR}/../support/libhero-target/pulp" header build install
+# ------------------------------------------------------------------------------------- #
 
-# Build libpremnotify for PULP
-${THIS_DIR}/setup-libprem-pulp.sh "${THIS_DIR}/.."
+# ======================================= #
+# Create SDK profile for overlay instance #
+# ======================================= #
 
 # Create ad-hoc header include for overlay instance
 mkdir -p ${PULP_SDK_HOME}/install/headers/
@@ -120,3 +136,5 @@ else
     rm -rf ${dst}
     mv ${src} ${dst}
 fi
+
+# ------------------------------------------------------------------------------------- #
