@@ -43,6 +43,16 @@ if [ ! -f "${THIS_DIR}/sdk/configs/${pulp_chip}.sh" ]; then
     exit 1
 fi
 
+# Check board installation environment
+if [ -z "${HERO_TARGET_HOST}" ]; then
+    echo "Fatal: 'HERO_TARGET_HOST' environment variable is not defined!"
+    exit 1
+fi
+if [ -z "${HERO_TARGET_PATH_LIB}" ]; then
+    echo "Fatal: 'HERO_TARGET_PATH_LIB' environment variable is not defined!"
+    exit 1
+fi
+
 # read target overlay device (set in local.cfg in HERO root directory)
 # this can either overlay or not with hero-urania
 hero_root_dir="${THIS_DIR}/.."
