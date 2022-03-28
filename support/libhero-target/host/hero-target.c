@@ -145,6 +145,21 @@ hero_rt_core_id(void)
 }
 
 // FIXME implement clock counters for host
+void 
+hero_start_clk_counter(void) { 
+  return;
+}
+
+void 
+hero_stop_clk_counter(void) { 
+  return;
+}
+
+void 
+hero_reset_clk_counter(void) { 
+  return;
+}
+
 int32_t
 hero_get_clk_counter(void) {
   return 0;

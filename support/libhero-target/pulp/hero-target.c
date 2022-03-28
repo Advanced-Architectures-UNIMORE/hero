@@ -160,7 +160,21 @@ void hero_l3free(HOST_VOID_PTR a) {
 
 int32_t hero_rt_core_id(void) { return rt_core_id(); }
 
-int32_t hero_get_clk_counter(void) { return get_time(); }
+void hero_start_clk_counter(void) { 
+  start_timer(); 
+}
+
+void hero_stop_clk_counter(void) { 
+  stop_timer(); 
+}
+
+void hero_reset_clk_counter(void) { 
+  reset_timer(); 
+}
+
+int32_t hero_get_clk_counter(void) { 
+  return get_time(); 
+}
 
 void __compiler_barrier(void) {
   asm volatile("" : : : "memory");
