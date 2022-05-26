@@ -91,7 +91,8 @@ plpbuild --g runtime checkout --stdout
 
 # Building `pulp-rt` will fail, but this is to be expected.
 set +e
-plpbuild --m pulp-rt build --stdout
+# plpbuild --m pulp-rt build --stdout
+plpbuild --m pulp-rt-acc-rich build --stdout
 echo 'NOTE: The failure of building `pulp-rt` at this point is known and can be tolerated.'
 
 # Now that the `pulp-rt` headers are installed, we can go ahead and install `archi-host` followed by
@@ -101,8 +102,10 @@ echo 'NOTE: The failure of building `pulp-rt` at this point is known and can be 
 plpbuild --m archi-host build --stdout
 
 # We fix this by forcing the `pulp-rt` headers, followed by the final compilation of `libvmm`.
-find runtime/pulp-rt/include -type f -exec touch {} +
-plpbuild --m pulp-rt build --stdout
+# find runtime/pulp-rt/include -type f -exec touch {} +
+# plpbuild --m pulp-rt build --stdout
+find runtime/pulp-rt-acc-rich/include -type f -exec touch {} +
+plpbuild --m pulp-rt-acc-rich build --stdout
 plpbuild --m libvmm build --stdout
 plpbuild --g runtime build --stdout
 
