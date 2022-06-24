@@ -20,7 +20,7 @@ readonly TARGET_BOARD="$1"
 readonly TARGET_NAME="$2"
 readonly TARGET_BITSTREAM="$3"
 # - environment
-readonly SCRIPT_DIR="$4"
+readonly PETALINUX_ROOT="$4"
 readonly BUILD_DIR="$5"
 
 # Print some user information about input parameters
@@ -28,7 +28,7 @@ echo -e "Building Petalinux project for...\n"
 echo -e ">> Target board: $TARGET_BOARD"
 echo -e ">> Target board: $TARGET_NAME"
 echo -e ">> Target bitstream: $TARGET_BITSTREAM"
-echo -e ">> Script root: $SCRIPT_DIR"
+echo -e ">> Script root: $PETALINUX_ROOT"
 echo -e ">> Project location: $BUILD_DIR"
 
 readonly HERO_ROOT="$HERO_HOME_DIR"
@@ -37,7 +37,7 @@ readonly LOCAL_CFG="$HERO_ROOT/local.cfg"
 set -e
 
 # Change working directory to path of script, so this script can be executed from anywhere.
-cd "$SCRIPT_DIR"
+cd "$PETALINUX_ROOT"
 
 # Resolve symlinks.
 cd "$(pwd -P)"

@@ -22,15 +22,15 @@ readonly TARGET_BOARD="$1"
 readonly TARGET_NAME="$2"
 readonly TARGET_BITSTREAM="$3"
 # - environment
-readonly SCRIPT_DIR="$4"
+readonly PETALINUX_ROOT="$4"
 readonly BUILD_DIR="$5"
 
 # Print some user information about input parameters
 echo -e "Building Petalinux project for...\n"
 echo -e ">> Target board: $TARGET_BOARD"
-echo -e ">> Target board: $TARGET_NAME"
+echo -e ">> Target name: $TARGET_NAME"
 echo -e ">> Target bitstream: $TARGET_BITSTREAM"
-echo -e ">> Script root: $SCRIPT_DIR"
+echo -e ">> Script root: $PETALINUX_ROOT"
 echo -e ">> Project location: $BUILD_DIR"
 
 readonly HERO_ROOT="$HERO_HOME_DIR"
@@ -39,7 +39,7 @@ readonly LOCAL_CFG="$HERO_ROOT/local.cfg"
 set -e
 
 # Change working directory to path of script, so this script can be executed from anywhere.
-cd "$SCRIPT_DIR"
+cd "$PETALINUX_ROOT"
 
 # Resolve symlinks.
 cd "$(pwd -P)"
@@ -104,8 +104,9 @@ $PETALINUX_VER petalinux-config --oldconfig --get-hw-description "$BITSTREAM_DIR
 mkdir -p components/ext_sources
 cd components/ext_sources
 if [ ! -d "linux-xlnx" ]; then
-    git clone --depth 1 --single-branch --branch xilinx-v2019.2.01 git@github.com:Xilinx/linux-xlnx.git # git://github.com/Xilinx/linux-xlnx.git
-fi
+    # git clone --depth 1 --single-branch --branch xilinx-v2019.2.01 git@github.com:Xilinx/linux-xlnx.git
+    git clone --depth 1 --single-branch --branch xilinx-v2019.2.01 https://github.com/Xilinx/linux-xlnx.git
+fi  
 cd linux-xlnx
 git checkout tags/xilinx-v2019.2.01
 
@@ -152,19 +153,20 @@ for pkg in \
 done
 
 create_install_app() {
-    $PETALINUX_VER petalinux-create --force -t apps --template install -n $1 --enable
-    cd project-spec/meta-user/recipes-apps/$1
-    patch <"$SCRIPT_DIR/recipes-apps/$1/${1}.bb.patch"
+    $PETALINUX_VER petalinux-create --force -t apps --template install -n ${1} --enable
+    cd project-spec/meta-user/recipes-apps/${1}
+    patch <"$PETALINUX_ROOT/scripts/recipes-apps/${1}/${1}.bb.patch"
     rm -r files
-    cp -r "$SCRIPT_DIR/recipes-apps/$1/files" .
+    cp -r "$PETALINUX_ROOT/scripts/recipes-apps/${1}/files" .
     cd ->/dev/null
 }
+
 # Create application that will mount SD card folders on boot.
 create_install_app init-mount
 # Create application that will execute scripts from SD card on boot.
 create_install_app init-exec-scripts
 # Create application to deploy custom `/etc/sysctl.conf`.
-cp "$HERO_ROOT/board/common/overlay/etc/sysctl.conf" "$SCRIPT_DIR/recipes-apps/sysctl-conf/files/"
+cp "$HERO_ROOT/board/common/overlay/etc/sysctl.conf" "$PETALINUX_ROOT/scripts/recipes-apps/sysctl-conf/files/"
 create_install_app sysctl-conf
 
 # Build PetaLinux.
