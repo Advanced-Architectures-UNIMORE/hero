@@ -10,10 +10,28 @@ export PULP_CURRENT_CONFIG=hero-urania@config_file=${HERO_PULP_SDK_DIR}/configs/
 
 if [[ -z "${HERO_TARGET_HOST}" ]]; then
   export HERO_TARGET_PATH="/mnt/root/"
+else
+  export HERO_TARGET_PATH="/home/root/workspace_gbellocchi" # personalize this with your own board working space
 fi
 export HERO_TARGET_PATH_APPS="${HERO_TARGET_PATH}/apps"
-export HERO_TARGET_PATH_DRIVER="${HERO_TARGET_PATH}/drivers"
-export HERO_TARGET_PATH_LIB="${HERO_TARGET_PATH}/lib"
+export HERO_TARGET_PATH_LIB="${HERO_BOARD_LIB_PATH}"
+export HERO_TARGET_PATH_DRIVER="${HERO_BOARD_DRIVER_PATH}"
+
+export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/lib"
+
+# read target overlay device (set in local.cfg in HERO root directory)
+# this can either overlay or not with hero-urania
+hero_root_dir="${THIS_DIR}/.."
+hero_config_file=${hero_root_dir}/local.cfg
+eval OV_CFG_DEVICE=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | tr -d '"')
+if [ -z "${OV_CFG_DEVICE}" ]; then
+    echo "ERROR: please set OV_CFG_DEV in local.cfg file"
+    exit 1
+else
+    echo "Setup of overlay libraries for '${OV_CFG_DEVICE}'"
+fi
+
+export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/hero-libs/apps/${OV_CFG_DEVICE}"
 
 export PLATFORM=ZYNQMP
 export BOARD=ZYNQMP
