@@ -55,6 +55,38 @@ static inline void _hero_wait_for_tf_completion(const uint32_t stream_id, const 
   }
 }
 
+hero_dma_job_t hero_memcpy_l2_to_l1_async(DEVICE_VOID_PTR const dst, 
+                                          DEVICE_VOID_PTR const src,
+                                          const uint32_t size) {
+  // Configure the DMA engine.
+  _hero_dma_conf->src_addr_low = (uint32_t)src;
+  _hero_dma_conf->src_addr_high = (uint32_t)(0);
+  _hero_dma_conf->dst_addr_low = (uint32_t)dst;
+  _hero_dma_conf->dst_addr_high = 0;
+  _hero_dma_conf->num_bytes = size;
+
+  // Launch transfer and obtain ID.
+  hero_dma_job_t hero_dma_job;
+  hero_dma_job.id = _hero_dma_conf->tf_id;
+  return hero_dma_job;
+}
+
+hero_dma_job_t hero_memcpy_l1_to_l2_async(DEVICE_VOID_PTR const dst, 
+                                          DEVICE_VOID_PTR const src,
+                                          const uint32_t size) {
+  // Configure the DMA engine.
+  _hero_dma_conf->src_addr_low = (uint32_t)src;
+  _hero_dma_conf->src_addr_high = (uint32_t)(0);
+  _hero_dma_conf->dst_addr_low = (uint32_t)dst;
+  _hero_dma_conf->dst_addr_high = 0;
+  _hero_dma_conf->num_bytes = size;
+
+  // Launch transfer and obtain ID.
+  hero_dma_job_t hero_dma_job;
+  hero_dma_job.id = _hero_dma_conf->tf_id;
+  return hero_dma_job;
+}
+
 hero_dma_job_t hero_memcpy_host2dev_async(DEVICE_VOID_PTR const dst, const HOST_VOID_PTR const src,
                                           const uint32_t size) {
   // Configure the DMA engine.

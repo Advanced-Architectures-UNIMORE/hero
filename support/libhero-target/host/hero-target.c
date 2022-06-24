@@ -21,6 +21,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+hero_dma_job_t hero_memcpy_l2_to_l1_async(DEVICE_VOID_PTR const dst, 
+                                          DEVICE_VOID_PTR const src,
+                                          const uint32_t size) {
+  memcpy((HOST_VOID_PTR)dst, (HOST_VOID_PTR)src, size);
+  hero_dma_job_t hero_dma_job;
+  hero_dma_job.id = 0;
+  return hero_dma_job;
+}
+
+hero_dma_job_t hero_memcpy_l1_to_l2_async(DEVICE_VOID_PTR const dst, 
+                                          DEVICE_VOID_PTR const src,
+                                          const uint32_t size) {
+  memcpy((HOST_VOID_PTR)dst, (HOST_VOID_PTR)src, size);
+  hero_dma_job_t hero_dma_job;
+  hero_dma_job.id = 0;
+  return hero_dma_job;
+}
+
 hero_dma_job_t
 hero_memcpy_host2dev_async(DEVICE_VOID_PTR dst, const HOST_VOID_PTR src,
                            uint32_t size)

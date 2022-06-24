@@ -80,6 +80,20 @@ typedef struct {
  * @{
  */
 
+/** Asynchronous memcpy from L2 to L1.
+ */
+
+hero_dma_job_t hero_memcpy_l2_to_l1_async(DEVICE_VOID_PTR const dst, 
+                                          DEVICE_VOID_PTR const src,
+                                          const uint32_t size);
+
+/** Asynchronous memcpy from L1 to L2.
+ */
+
+hero_dma_job_t hero_memcpy_l1_to_l2_async(DEVICE_VOID_PTR const dst, 
+                                          DEVICE_VOID_PTR const src,
+                                          const uint32_t size);
+
 /** Asynchronous memcpy from host to device (`host2dev`) or from device to host (`dev2host`).
 
   These functions make a "best effort" to start the requested memcpy and then immediately return to
