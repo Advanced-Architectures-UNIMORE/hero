@@ -1,6 +1,6 @@
 # =====================================================================
 # Project:      PULP SDK
-# Title:        build-ov-libs.sh
+# Title:        build-arov-libs.sh
 # Description:  Build device libraries for target overlay device.
 #
 # $Date:        24.3.2022

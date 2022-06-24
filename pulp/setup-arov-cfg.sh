@@ -1,6 +1,6 @@
 # =====================================================================
 # Project:      PULP SDK
-# Title:        setup-ov-cfg.sh
+# Title:        setup-arov-cfg.sh
 # Description:  Setup SDK profile for target overlay device.
 #
 # $Date:        2.3.2022

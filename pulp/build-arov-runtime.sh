@@ -1,9 +1,9 @@
 # =====================================================================
 # Project:      PULP SDK
-# Title:        setup-sdk.sh
-# Description:  Setup SDK and compile the PULP runtime libraries.
+# Title:        build-arov-runtime.sh
+# Description:  Build runtime for accelerator-rich overlay.
 #
-# $Date:        24.3.2022
+# $Date:        26.5.2022
 # =====================================================================
 #
 # Authors: 
@@ -91,8 +91,8 @@ plpbuild --g runtime checkout --stdout
 
 # Building `pulp-rt` will fail, but this is to be expected.
 set +e
-plpbuild --m pulp-rt build --stdout
-# plpbuild --m pulp-rt-acc-rich build --stdout
+# plpbuild --m pulp-rt build --stdout
+plpbuild --m pulp-rt-acc-rich build --stdout
 echo 'NOTE: The failure of building `pulp-rt` at this point is known and can be tolerated.'
 
 # Now that the `pulp-rt` headers are installed, we can go ahead and install `archi-host` followed by
