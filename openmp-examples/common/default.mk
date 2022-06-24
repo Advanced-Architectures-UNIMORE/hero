@@ -68,7 +68,7 @@ all : $(DEPS) $(EXE) $(EXE).dis slm
 	cp $(<:.ll=.TMP.3.ll) $(<:.ll=.OMP.ll)
 
 $(EXE): $(SRC:.c=.OMP.ll)
-	$(CC) $(LIBPATHS) $(CFLAGS_PULP) $^ $(LDFLAGS_PULP) -o $@
+	$(CC) -v $(LIBPATHS) $(CFLAGS_PULP) $^ $(LDFLAGS_PULP) -o $@
 
 slm: $(EXE)_l1.slm $(EXE)_l2.slm
 
@@ -92,7 +92,7 @@ else
 all: $(DEPS) $(EXE) $(EXE).dis $(EXE).pulp.dis
 
 %.ll: %.c $(DEPDIR)/%.d | $(DEPDIR)
-	$(CC) -c -emit-llvm -S $(DEPFLAGS) $(CFLAGS) $(INCPATHS) $<
+	$(CC) -v -c -emit-llvm -S $(DEPFLAGS) $(CFLAGS) $(INCPATHS) $<
 	$(COB) -inputs=$@ -outputs="$(<:.c=-host.ll),$(<:.c=-dev.ll)" -type=ll -targets="$(ARCH_HOST),$(ARCH_DEV)" -unbundle
 
 %-dev.OMP.ll: %.ll
@@ -110,7 +110,7 @@ all: $(DEPS) $(EXE) $(EXE).dis $(EXE).pulp.dis
 
 exeobjs := $(patsubst %.c, %-out.ll, $(SRC))
 $(EXE): $(exeobjs)
-	$(CC) $(LIBPATHS) $(CFLAGS) $(exeobjs) $(LDFLAGS) -o $@
+	$(CC) -v $(LIBPATHS) $(CFLAGS) $(exeobjs) $(LDFLAGS) -o $@
 
 $(EXE).dis: $(EXE)
 	$(HOST_OBJDUMP) -d $^ > $@
@@ -136,9 +136,11 @@ init-target-host:
 ifndef HERO_TARGET_HOST
 	$(error HERO_TARGET_HOST is not set)
 endif
-	ssh -t $(HERO_TARGET_HOST) './sourceme.sh'
-	ssh -t $(HERO_TARGET_HOST) 'rmmod -f pulp'
-	ssh -t $(HERO_TARGET_HOST) 'insmod $(HERO_TARGET_PATH_DRIVER)/pulp.ko'
+# ssh -t $(HERO_TARGET_HOST) './sourceme.sh'
+	@echo "HERO_TARGET_HOST: $(HERO_TARGET_HOST)"
+	@echo "HERO_TARGET_PATH_DRIVER: $(HERO_TARGET_PATH_DRIVER)"
+#ssh -t $(HERO_TARGET_HOST) '/sbin/rmmod -f pulp'
+#ssh -t $(HERO_TARGET_HOST) '/sbin/insmod $(HERO_TARGET_PATH_DRIVER)/pulp.ko'
 
 prepare:: init-target-host $(EXE)
 ifndef HERO_TARGET_HOST
