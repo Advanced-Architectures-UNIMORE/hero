@@ -20,3 +20,6 @@
 [submodule "genov"]
 	path = genov
 	url = git@iis-git.ee.ethz.ch:gianluca.bellocchi/genov.git
+[submodule "arov"]
+	path = arov
+	url = git@iis-git.ee.ethz.ch:gianluca.bellocchi/arov.git
