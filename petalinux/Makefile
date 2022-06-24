@@ -13,7 +13,7 @@
 #
 # =====================================================================
 
-ROOT 			:= $(patsubst %/,%, $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
+PETALINUX_ROOT 		:= $(patsubst %/,%, $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 # user parameters
 TARGET_BOARD 		:= zcu102
@@ -24,8 +24,8 @@ TARGET_BITSTREAM 	:= BR2_HERO_BITSTREAM
 BUILD_DIR		:= ${GBELLOCCHI_SCRATCH2}/ethz/petalinux
 
 # directories
-SCRIPTS_DIR		:= $(ROOT)/scripts
-OUT_DIR			:= $(ROOT)/output
+SCRIPTS_DIR		:= $(PETALINUX_ROOT)/scripts
+OUT_DIR			:= $(PETALINUX_ROOT)/output
 
 .PHONY: clean
 
@@ -58,7 +58,7 @@ update_output: clean_output
 
 update_bitstream:
 	@$(SCRIPTS_DIR)/$@.sh \
-		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${ROOT} ${BUILD_DIR}
+		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${PETALINUX_ROOT} ${BUILD_DIR}
 
 # ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ #
 
@@ -68,7 +68,7 @@ update_bitstream:
 
 build_petalinux:
 	@$(SCRIPTS_DIR)/$(TARGET_BOARD).sh \
-		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${ROOT} ${BUILD_DIR}
+		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${PETALINUX_ROOT} ${BUILD_DIR}
 
 clean_output:
 	@rm -rf $(OUT_DIR)/*
