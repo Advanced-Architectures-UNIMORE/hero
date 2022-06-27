@@ -69,10 +69,17 @@ The PULP SDK is required to build applications for PULP. This has to be set up b
 ```
 make sdk-pulp
 ```
+Creating different SDK setups for different instances of the overlay device is possible. A line with value `OV_CFG_DEV="<target-overlay-instance>"` should be added to a file `local.cfg` in the root repository. 
 
-To create different SDK setups for different instances of the overlay device is possible. A line with value `OV_CFG_DEV="<target-overlay-instance>"` should be added to a file `local.cfg` in the root repository. hen, the SDK should be rebuilt using the `make sdk-pulp` command. At this point, the installation of the appication-specific libraries (e.g. HWPE) dealing with <target-overlay-instance> will be installed under specific paths under `${PULP_SDK_HOME}/install/`.
+After generating the required HW/SW components using the AROV stack, add a corresponding configuration setup under `${HERO_HOME_DIR}/pulp/refs`.
 
-When swapping overlay instance, the line in `local.cfg` can be updated with a new with <target-overlay-instance>. Then launching `make sdk-ov-libs` updates the SDK configuration to re-target the corresponding appication-specific libraries.
+Hence, the SDK should be rebuilt using `make sdk-pulp`. At this point, the runtime components (configuration files, libraries, headers, etc.) dealing with "target-overlay-instance" will be automatically installed in a compliant location, under `${PULP_SDK_HOME}/install/`.
+
+When swapping the overlay instance, the line in `local.cfg` is to be manually updated with the corresponding `<target-overlay-instance>`. It follows that launching `make sdk-arov-cfg` configures the SDK to target the target overlay libraries. 
+
+Building the device libraries (e.g. the "libhero-target") without reinstalling the entire SDK is possible launching `make sdk-arov-libs`.
+
+In brief, this method allows maintaining different application libraries associated with different hardware versions. At the moment the implementation manifests a strict legacy to the HERO SDK implementation. A future goal is to detach from the latter.
 
 
 ### Host SDKs
