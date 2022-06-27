@@ -26,10 +26,6 @@ THIS_DIR=$(dirname "$(readlink -f "$0")")
 
 # Check environment
 set -e
-if [ -z "${PULP_SDK_HOME}" ]; then
-  echo "Fatal error: The 'PULP_SDK_HOME' environment variable is not defined!"
-  exit 1
-fi
 if [ -z "${HERO_INSTALL}" ]; then
   echo "Fatal error: The 'HERO_INSTALL' environment variable is not defined!"
   exit 1
