@@ -1,12 +1,45 @@
 variables:
+  DOWNSTREAM: "false"
   GIT_SUBMODULE_STRATEGY: recursive
   HERO_INSTALL: '$CI_PROJECT_DIR/install'
   RUST_LOG: 'memora=debug'
   PATH: '/home/gitlabci/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/condor/bin:/usr/sepp/bin'
 
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^upstream-/'
+      when: never # do not run branch pipelines for the CI-generated `upstream-` branches
+    - when: always # default rule, run job if no previous rule matched
+
 before_script:
   - env
   - mkdir -p $HERO_INSTALL
+  - |
+    git config --local user.name 'GitLab CI at IIS'
+    git config --local user.email 'gitlabci@iis-git.ee.ethz.ch'
+  - >
+    if [ "$DOWNSTREAM" = "true" ]; then
+      # This is a downstream job, i.e., it has been triggered as part of an upstream pipeline.
+      # First, make sure that the commit of the upstream repository is available.  That commit might
+      # exist only on GitLab.
+      if [ "$SUBMODULE_NAME" = "llvm-project" ]; then
+        cd toolchain/llvm-project
+        git remote set-url origin git@iis-git.ee.ethz.ch:iis-compilers/llvm-project.git
+      else
+        echo "Error: Unknown submodule '$SUBMODULE_NAME' for downstream pipeline!"
+        exit 1
+      fi
+      git fetch origin
+      cd -
+      # Second, check out the branch for the tuple of commit in this repository and commit in the
+      # upstream repository.  This branch is created by the `pre-downstream-checkout` job.
+      if [ "$CI_JOB_NAME" != "pre-downstream-checkout" ]; then
+        branch="upstream-$SUBMODULE_NAME-$SUBMODULE_COMMIT_SHA-for-$CI_COMMIT_SHA"
+        git checkout --quiet --recurse-submodules "$branch"
+        echo "Checked out '$branch', which has the following commit:"
+        git show
+      fi
+    fi
 
 after_script:
   - chmod -R u+w $HERO_INSTALL
@@ -18,9 +51,33 @@ stages:
   - build4
   - test
 
+pre-downstream-checkout:
+  stage: .pre
+  script:
+    - |
+      if [ "$DOWNSTREAM" = "true" ]; then
+        # This is a downstream pipeline, so we need to create a branch with a commit that applies
+        # the upstream update.
+        branch="upstream-$SUBMODULE_NAME-$SUBMODULE_COMMIT_SHA-for-$CI_COMMIT_SHA"
+        git checkout -b "$branch"
+        if [ "$SUBMODULE_NAME" = "llvm-project" ]; then
+          submodule_path=toolchain/llvm-project
+        else
+          echo "Error: Unknown submodule '$SUBMODULE_NAME' for downstream pipeline!"
+          exit 1
+        fi
+        cd "$submodule_path"
+        git checkout --recurse-submodules "$SUBMODULE_COMMIT_SHA"
+        cd -
+        git add "$submodule_path"
+        git commit -m "$submodule_path: Update to upstream $SUBMODULE_COMMIT_SHA"
+        git remote set-url origin git@iis-git.ee.ethz.ch:hero/hero.git
+        git push origin "$branch"
+      fi
+
 tc-pulp:
   stage: build1
-  needs: []
+  needs: ["pre-downstream-checkout"]
   script:
     - >
       if ! $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh lookup tc-pulp; then
@@ -31,7 +88,7 @@ tc-pulp:
 
 tc-har-olinux:
   stage: build1
-  needs: []
+  needs: ["pre-downstream-checkout"]
   script:
     - >
       if ! $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh lookup tc-har-olinux; then
@@ -42,7 +99,7 @@ tc-har-olinux:
 
 tc-hrv-olinux:
   stage: build1
-  needs: []
+  needs: ["pre-downstream-checkout"]
   script:
     - >
       if ! $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh lookup tc-hrv-olinux; then
@@ -53,16 +110,16 @@ tc-hrv-olinux:
 
 vsim-pulp:
   stage: build1
-  needs: []
+  needs: ["pre-downstream-checkout"]
   script:
     - >
       if $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh lookup vsim-pulp; then
         exit 0
       fi
-    - cd genov
+    - cd hardware
     - make
     - cd vsim
-    - make compile
+    - ./compile.sh
     - $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh insert vsim-pulp
 
 sdk-pulp-and-sdk-har-and-prem:
@@ -120,7 +177,11 @@ tc-llvm:
       fi
     - $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh get sdk-pulp-and-sdk-har
     - chmod -R u-w $HERO_INSTALL
+    - export CXX=/usr/pack/gcc-9.2.0-af/linux-x64/bin/g++ # LLVM 12 needs 5.1+
+    - export CC=/usr/pack/gcc-9.2.0-af/linux-x64/bin/gcc  # LLVM 12 needs 5.1+
     - make tc-llvm
+    - unset CXX # Cleanup after LLVM 12 build
+    - unset CC  # Cleanup after LLVM 12 build
     - git diff --exit-code # assert that applied patches made no difference
     - chmod -R u+w $HERO_INSTALL
     - $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh insert tc-llvm
@@ -128,11 +189,11 @@ tc-llvm:
 
 bitstream-zcu102:
   stage: build3
-  needs: []
+  needs: ["pre-downstream-checkout"]
   script:
     - >
       if ! $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh lookup bitstream-zcu102; then
-        cd genov/fpga
+        cd hardware/fpga
         make hero_exilzcu102
         $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh insert bitstream-zcu102
       fi
@@ -152,7 +213,7 @@ br-har-exilzcu102-and-prem:
     - $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh get tc-pulp # required to build PULP SDK
     - chmod -R u-w $HERO_INSTALL
     - make sdk-pulp # TODO: `sdk-pulp-har` does not seem to work?
-    - echo "BR2_HERO_BITSTREAM=$CI_PROJECT_DIR/genov/fpga/hero_exilzcu102/hero_exilzcu102.runs/impl_1/hero_exilzcu102_wrapper.bit" >> local.cfg
+    - echo "BR2_HERO_BITSTREAM=$CI_PROJECT_DIR/hardware/fpga/hero_exilzcu102/hero_exilzcu102.runs/impl_1/hero_exilzcu102_wrapper.bit" >> local.cfg
     - make br-har-exilzcu102
     - $CI_PROJECT_DIR/.gitlab-ci.d/memora_retry.sh insert br-har-exilzcu102
     - make prem-set
