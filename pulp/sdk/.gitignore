@@ -12,6 +12,7 @@ __pycache__
 !/runtime/libomptarget-pulp-rtl
 !/runtime/libvmm
 !/runtime/pulp-rt
+!/runtime/pulp-rt-arov
 /sourceme.*
 /testset.cfg
 /tools

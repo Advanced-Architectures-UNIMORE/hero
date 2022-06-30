@@ -100,8 +100,8 @@ plpbuild --m archi-host build --stdout
 # We fix this by forcing the `pulp-rt` headers, followed by the final compilation of `libvmm`.
 # find runtime/pulp-rt/include -type f -exec touch {} +
 # plpbuild --m pulp-rt build --stdout
-find runtime/pulp-rt-acc-rich/include -type f -exec touch {} +
-plpbuild --m pulp-rt-acc-rich build --stdout
+find runtime/pulp-rt-arov/include -type f -exec touch {} +
+plpbuild --m pulp-rt-arov build --stdout
 plpbuild --m libvmm build --stdout
 plpbuild --g runtime build --stdout
 
