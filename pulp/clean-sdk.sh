@@ -50,7 +50,7 @@ else
     echo -e ""
     echo "# ====================================================================="
     echo "#"
-    echo "# Cleaning SDK profile for target '${ov_cfg_device}'"
+    echo "# Cleaning SDK for target '${ov_cfg_device}'"
     echo "#"
     echo "# ====================================================================="
     echo -e ""
@@ -67,12 +67,10 @@ export PULP_RISCV_GCC_TOOLCHAIN=$HERO_INSTALL
 
 # Device install dir
 install_dir=${PULP_SDK_HOME}/install
-install_hero_cfg_dir=${install_dir}/hero
-install_ov_cfg_dir=${install_dir}/hero/${ov_cfg_device}
-install_inc_dir=${install_dir}/headers/${ov_cfg_device}
-install_lib_dir=${install_dir}/lib/${ov_cfg_device}
 
 # Unlink old symbolic links
+
+echo -e "Cleaning:"
 
 # headers
 link=${install_dir}/include
@@ -81,38 +79,45 @@ if [ -L ${link} ]; then
         unlink ${link}
     fi
 fi
+echo -e "- HEADERS: ${link}"
 
 # libs
 # - hero-urania
-link=${install_lib_dir}/../${pulp_chip}
+link=${install_dir}/lib/${pulp_chip}
 if [ -L ${link} ]; then
     if [ -e ${link} ]; then
         unlink ${link}
     fi
 fi
+echo -e "- LIB ${pulp_chip}: ${link}"
+
 # - hero-sim
-link=${install_lib_dir}/../hero-sim
+link=${install_dir}/lib/hero-sim
 if [ -L ${link} ]; then
     if [ -e ${link} ]; then
         unlink ${link}
     fi
 fi
+echo -e "- LIB hero-sim: ${link}"
 
 # config files
 # - hero-urania
-link=${install_hero_cfg_dir}/hero-urania
-echo "link=${install_hero_cfg_dir}/hero-urania"
+link=${install_dir}/hero/hero-urania
 if [ -L ${link} ]; then
     if [ -e ${link} ]; then
         unlink ${link}
     fi
 fi
+echo -e "- CFG_FILE ${pulp_chip}: ${link}"
+
 # - hero-sim
-link=${install_hero_cfg_dir}/hero-sim
+link=${install_dir}/hero/hero-sim
 if [ -L ${link} ]; then
     if [ -e ${link} ]; then
         unlink ${link}
     fi
 fi
+echo -e "- CFG_FILE hero-sim: ${link}"
+echo -e ""
 
 # ------------------------------------------------------------------------------------- #

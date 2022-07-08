@@ -1,7 +1,7 @@
 # =====================================================================
 # Project:      PULP SDK
-# Title:        setup-arov-cfg.sh
-# Description:  Setup SDK profile for target overlay device.
+# Title:        config-sdk.sh
+# Description:  Configure SDK for target overlay device.
 #
 # $Date:        2.3.2022
 # =====================================================================
@@ -51,7 +51,7 @@ else
   echo -e ""
   echo "# ====================================================================="
   echo "#"
-  echo "# Setup of overlay libraries for target '${ov_cfg_device}'"
+  echo "# Configuring SDK for target '${ov_cfg_device}'"
   echo "#"
   echo "# ====================================================================="
   echo -e ""
@@ -70,21 +70,28 @@ install_ov_cfg_dir=${install_dir}/hero/${ov_cfg_device}
 install_inc_dir=${install_dir}/headers/${ov_cfg_device}
 install_lib_dir=${install_dir}/lib/${ov_cfg_device}
 
+echo -e "Creating components of SDK setup:"
+
 # ------------------------------------------------------------------------------------- #
 
 # ============= #
 # Setup headers #
 # ============= #
 
+mkdir -p ${install_inc_dir}
+
 # The compiled headers for ${ov_cfg_device} are symbolically linked to an include directory.
 # This allows to not modify the compilation flow and adapt it to the different overlay
 # instances the user may want to work with.
+link=${install_dir}/include
 if [ -d "${install_inc_dir}" ]; then
-    ln -sf ${install_inc_dir} ${install_dir}/include
+    ln -sf ${install_inc_dir} ${link}
 else
     echo "ERROR: please set OV_CFG_DEV in local.cfg file"
     exit 1
 fi
+
+echo -e "- HEADERS: ${link}"
 
 # ------------------------------------------------------------------------------------- #
 
@@ -92,56 +99,93 @@ fi
 # Setup libraries #
 # =============== #
 
+mkdir -p ${install_lib_dir}
+
 # The compiled library for ${ov_cfg_device} are symbolically linked to ${pulp_chip}
 # because to build configurations for ${ov_cfg_device} would be a majour effort (dynamic
 # generation of json scripts, etc. for the SDK to build the runtime libs, etc.) that
 # is not on the critical path right now.
 # NB: This symbolic link has to be updated at each application swapping.
-ln -sf ${install_lib_dir} ${install_lib_dir}/../${pulp_chip}
+link=${install_dir}/lib/${pulp_chip}
+if [ -d "${install_lib_dir}" ]; then
+    ln -sf ${install_lib_dir} ${link}
+else
+    echo "ERROR: please set OV_CFG_DEV in local.cfg file"
+    exit 1
+fi
+echo -e "- LIB ${pulp_chip}: ${link}"
 
 # Create symlink from current config to hero-sim
 # FIXME: remove the special logic for hero-sim after unifying this further
-ln -sf ${install_lib_dir} ${install_lib_dir}/../hero-sim
+link=${install_dir}/lib/hero-sim
+if [ -d "${install_lib_dir}" ]; then
+    ln -sf ${install_lib_dir} ${link}
+else
+    echo "ERROR: please set OV_CFG_DEV in local.cfg file"
+    exit 1
+fi
+echo -e "- LIB hero-sim: ${link}"
 
 # ------------------------------------------------------------------------------------- #
 
-# ======================================== #
-# Build and install configuration profiles #
-# ======================================== #
+# =================================== #
+# Build and install SDK configuration #
+# =================================== #
 
-# Remove previous versions of same overlay instance
-if [ -d "${install_ov_cfg_dir}-xilzcu102" ]; then
-    if [ -n "$(ls -A ${install_ov_cfg_dir}-xilzcu102 2>/dev/null)" ]; then
-        rm ${install_ov_cfg_dir}-xilzcu102/*
+mkdir -p ${install_ov_cfg_dir}/xilzcu102
+mkdir -p ${install_ov_cfg_dir}/sim
+
+echo -e "\nUpdate SDK configurations:"
+
+# Remove previous versions of configuration files
+if [ -d "${install_ov_cfg_dir}/xilzcu102" ]; then
+    if [ -n "$(ls -A ${install_ov_cfg_dir}/xilzcu102 2>/dev/null)" ]; then
+        rm ${install_ov_cfg_dir}/xilzcu102/*
     fi
 fi
-if [ -d "${install_ov_cfg_dir}-sim" ]; then
-    if [ -n "$(ls -A ${install_ov_cfg_dir}-sim 2>/dev/null)" ]; then
-        rm ${install_ov_cfg_dir}-sim/*
+if [ -d "${install_ov_cfg_dir}/sim" ]; then
+    if [ -n "$(ls -A ${install_ov_cfg_dir}/sim 2>/dev/null)" ]; then
+        rm ${install_ov_cfg_dir}/sim/*
     fi
 fi
 
 # Install deployment object files (xilzcu102)
+echo -e "- XILZCU102"
 cd ${THIS_DIR}
 source ${THIS_DIR}/sdk/sourceme.sh
-mkdir -p ${install_ov_cfg_dir}-xilzcu102
-$HERO_INSTALL/bin/riscv32-unknown-elf-gcc -Wextra -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wundef -fdata-sections -ffunction-sections -I${PULP_SDK_INSTALL}/include/io -I${PULP_SDK_INSTALL}/include -march=rv32imcxpulpv2 -D__riscv__ -include refs/${ov_cfg_device}/xilzcu102/cl_config.h -c refs/rt_conf.c -o ${install_ov_cfg_dir}-xilzcu102/rt_conf.o
-cp -r ${THIS_DIR}/refs/${ov_cfg_device}/xilzcu102/* ${install_ov_cfg_dir}-xilzcu102
+mkdir -p ${install_ov_cfg_dir}/xilzcu102
+$HERO_INSTALL/bin/riscv32-unknown-elf-gcc -Wextra -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wundef -fdata-sections -ffunction-sections -I${PULP_SDK_INSTALL}/include/io -I${PULP_SDK_INSTALL}/include -march=rv32imcxpulpv2 -D__riscv__ -include refs/${ov_cfg_device}/xilzcu102/cl_config.h -c refs/rt_conf.c -o ${install_ov_cfg_dir}/xilzcu102/rt_conf.o
+cp -r ${THIS_DIR}/refs/${ov_cfg_device}/xilzcu102/* ${install_ov_cfg_dir}/xilzcu102
 
 # Install simulation object files (sim)
+echo -e "- SIM"
 cd ${THIS_DIR}
 source ${THIS_DIR}/sdk/sourceme.sh
-mkdir -p ${install_ov_cfg_dir}-sim
-# $HERO_INSTALL/bin/riscv32-unknown-elf-gcc -Wextra -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wundef -fdata-sections -ffunction-sections -I${PULP_SDK_INSTALL}/include/io -I${PULP_SDK_INSTALL}/include -march=rv32imcxpulpv2 -D__riscv__ -include refs/${ov_cfg_device}/sim/cl_config.h -c refs/rt_conf.c -o ${install_ov_cfg_dir}-sim/rt_conf.o
-ln -sf ${install_ov_cfg_dir}-xilzcu102/rt_conf.o ${install_ov_cfg_dir}-sim
-cp -r ${THIS_DIR}/refs/${ov_cfg_device}/sim/* ${install_ov_cfg_dir}-sim
+mkdir -p ${install_ov_cfg_dir}/sim
+$HERO_INSTALL/bin/riscv32-unknown-elf-gcc -Wextra -Wall -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wundef -fdata-sections -ffunction-sections -I${PULP_SDK_INSTALL}/include/io -I${PULP_SDK_INSTALL}/include -march=rv32imcxpulpv2 -D__riscv__ -include refs/${ov_cfg_device}/sim/cl_config.h -c refs/rt_conf.c -o ${install_ov_cfg_dir}/sim/rt_conf.o
+# ln -sf ${install_ov_cfg_dir}/xilzcu102/rt_conf.o ${install_ov_cfg_dir}/sim
+cp -r ${THIS_DIR}/refs/${ov_cfg_device}/sim/* ${install_ov_cfg_dir}/sim
 
 # Install deployment object files (xilzcu102)
 cp -r ${THIS_DIR}/refs/omptarget.ld ${install_hero_cfg_dir}
 cp -r ${THIS_DIR}/refs/rt_conf.c ${install_hero_cfg_dir}
 
 # Create symlink to hero-urania/sim
-ln -sf ${install_ov_cfg_dir}-xilzcu102 ${install_hero_cfg_dir}/hero-urania
-ln -sf ${install_ov_cfg_dir}-sim ${install_hero_cfg_dir}/hero-sim
+ln -sf ${install_ov_cfg_dir}/xilzcu102 ${install_hero_cfg_dir}/hero-urania
+ln -sf ${install_ov_cfg_dir}/sim ${install_hero_cfg_dir}/hero-sim
+
+# ------------------------------------------------------------------------------------- #
+
+# ============================ #
+# check if SDK build is needed #
+# ============================ #
+
+if [ -z "$(ls -A ${install_lib_dir})" ]; then
+    echo -e ""
+    echo -e "########################################################################################################################################"
+    echo -e "-- WARNING -- No libraries have been found for target '${ov_cfg_device}'. It is recommended to launch an SDK build (cmd: make sdk-pulp)."
+    echo -e "########################################################################################################################################"
+    echo -e ""
+fi
 
 # ------------------------------------------------------------------------------------- #
