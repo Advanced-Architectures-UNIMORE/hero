@@ -53,7 +53,7 @@ fi
 # this can either overlay or not with hero-urania
 hero_root_dir="${THIS_DIR}/.."
 hero_config_file=${hero_root_dir}/local.cfg # HERO Config File
-eval ov_cfg_device=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | tr -d '"')
+ov_cfg_device=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | sed 's/ //g' | tr -d '"') 
 if [ -z "${ov_cfg_device}" ]; then
   echo "ERROR: please set OV_CFG_DEV in local.cfg file"
   exit 1

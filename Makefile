@@ -108,7 +108,7 @@ tc-llvm-debug: check_environment
 # SDK
 .PHONY: sdk-pulp-hrv sdk-pulp sdk-pulp-har sdk-hrv sdk-har
 
-sdk-pulp: sdk-arov-clean sdk-arov-cfg sdk-pulp-hrv sdk-arov-libs
+sdk-pulp: sdk-arov-clean sdk-pulp-hrv sdk-arov-cfg sdk-arov-refs sdk-arov-libs
 
 sdk-pulp-hrv: check_environment
 	$(ROOT)/pulp/build-sdk.sh hero-urania
@@ -121,6 +121,9 @@ sdk-hrv: check_environment br-hrv
 
 sdk-har: check_environment br-har
 	cd $(CURDIR)/output/br-har && $(ROOT)/toolchain/install-sdk.sh
+
+sdk-arov-refs: sdk-arov-clean sdk-arov-cfg
+	$(ROOT)/pulp/build-refs.sh hero-urania
 
 sdk-arov-libs: sdk-arov-clean sdk-arov-cfg
 	$(ROOT)/pulp/build-libs.sh hero-urania
