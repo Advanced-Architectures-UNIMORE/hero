@@ -88,12 +88,12 @@ echo -e "\nUpdate SDK configurations:"
 # Remove previous versions of configuration files
 if [ -d "${install_ov_cfg_dir}/xilzcu102" ]; then
     if [ -n "$(ls -A ${install_ov_cfg_dir}/xilzcu102 2>/dev/null)" ]; then
-        rm ${install_ov_cfg_dir}/xilzcu102
+        rm ${install_ov_cfg_dir}/xilzcu102/*
     fi
 fi
 if [ -d "${install_ov_cfg_dir}/sim" ]; then
     if [ -n "$(ls -A ${install_ov_cfg_dir}/sim 2>/dev/null)" ]; then
-        rm ${install_ov_cfg_dir}/sim
+        rm ${install_ov_cfg_dir}/sim/*
     fi
 fi
 
@@ -113,7 +113,7 @@ ln -sf ${install_ov_cfg_dir}/xilzcu102/rt_conf.o ${install_ov_cfg_dir}/sim
 cp -r ${THIS_DIR}/refs/${ov_cfg_device}/sim/* ${install_ov_cfg_dir}/sim
 
 # Install deployment object files (xilzcu102)
-cp -r ${THIS_DIR}/refs/omptarget.ld ${install_hero_cfg_dir}
-cp -r ${THIS_DIR}/refs/rt_conf.c ${install_hero_cfg_dir}
+cp -r ${THIS_DIR}/refs/omptarget.ld ${install_ov_cfg_dir}
+cp -r ${THIS_DIR}/refs/rt_conf.c ${install_ov_cfg_dir}
 
 # ------------------------------------------------------------------------------------- #
