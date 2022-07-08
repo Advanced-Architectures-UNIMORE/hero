@@ -41,6 +41,7 @@ _entry:
   // to the slave entry point
   bne     a1, x0, __rt_pe_start
   bne     a0, x0, __rt_pe_start
+
 #endif
 #endif
 
@@ -116,10 +117,6 @@ is_ariane:
 
   /* Do all other initializations from C code */
   jal  x1, __rt_init
-
-
-
-
 
 .section .text
 
