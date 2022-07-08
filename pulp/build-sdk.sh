@@ -1,7 +1,7 @@
 # =====================================================================
 # Project:      PULP SDK
-# Title:        setup-sdk.sh
-# Description:  Setup SDK and compile the PULP runtime libraries.
+# Title:        build-sdk.sh
+# Description:  Initialize SDK setup and build the PULP runtime libraries.
 #
 # $Date:        24.3.2022
 # =====================================================================
@@ -50,7 +50,7 @@ else
     echo -e ""
     echo "# ====================================================================="
     echo "#"
-    echo "# Setup of SDK profile for target '${ov_cfg_device}'"
+    echo "# Initializing SDK setup for target '${ov_cfg_device}'"
     echo "#"
     echo "# ====================================================================="
     echo -e ""
@@ -64,6 +64,8 @@ export PULP_RISCV_GCC_TOOLCHAIN=$HERO_INSTALL
 # ============================== #
 # Compile PULP runtime libraries #
 # ============================== #
+
+echo -e "Compiling PULP runtime libraries"
 
 cd ${THIS_DIR}/sdk
 
@@ -88,7 +90,6 @@ plpbuild --g runtime checkout --stdout
 # Building `pulp-rt` will fail, but this is to be expected.
 set +e
 plpbuild --m pulp-rt build --stdout
-# plpbuild --m pulp-rt-acc-rich build --stdout
 echo 'NOTE: The failure of building `pulp-rt` at this point is known and can be tolerated.'
 
 # Now that the `pulp-rt` headers are installed, we can go ahead and install `archi-host` followed by
@@ -98,10 +99,8 @@ echo 'NOTE: The failure of building `pulp-rt` at this point is known and can be 
 plpbuild --m archi-host build --stdout
 
 # We fix this by forcing the `pulp-rt` headers, followed by the final compilation of `libvmm`.
-# find runtime/pulp-rt/include -type f -exec touch {} +
-# plpbuild --m pulp-rt build --stdout
-find runtime/pulp-rt-arov/include -type f -exec touch {} +
-plpbuild --m pulp-rt-arov build --stdout
+find runtime/pulp-rt/include -type f -exec touch {} +
+plpbuild --m pulp-rt build --stdout
 plpbuild --m libvmm build --stdout
 plpbuild --g runtime build --stdout
 
@@ -111,11 +110,12 @@ make env
 
 # ------------------------------------------------------------------------------------- #
 
-# ======================================= #
-# Create SDK profile for overlay instance #
-# ======================================= #
+# ================================ #
+# Create HEADER and LIB for target #
+# ================================ #
 
-# Create ad-hoc header include for overlay instance
+# Create header directory
+echo -e "Creating HEADER directory for target"
 mkdir -p ${PULP_SDK_HOME}/install/headers/
 src=${PULP_SDK_HOME}/install/include
 dst=${PULP_SDK_HOME}/install/headers/${ov_cfg_device}
@@ -126,7 +126,8 @@ else
     mv ${src} ${dst}
 fi
 
-# Create ad-hoc library for overlay instance
+# Create library directory
+echo -e "Creating LIB directory for target"
 src=${PULP_SDK_HOME}/install/lib/${pulp_chip}
 dst=${PULP_SDK_HOME}/install/lib/${ov_cfg_device}
 if [ ! -d ${dst} ]; then

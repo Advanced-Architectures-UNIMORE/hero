@@ -1,6 +1,6 @@
 # =====================================================================
 # Project:      PULP SDK
-# Title:        build-arov-libs.sh
+# Title:        build-libs.sh
 # Description:  Build device libraries for target overlay device.
 #
 # $Date:        24.3.2022
@@ -74,9 +74,11 @@ fi
 # ================================== #
 
 # Build libhero-target
+echo "# Build 'libhero-target'"
 make -C "${hero_root_dir}/support/libhero-target/pulp" header build install
 
 # Build libpremnotify for PULP
+echo "# Build 'libpremnotify'"
 ${THIS_DIR}/setup-libprem-pulp.sh "${THIS_DIR}/.."
 
 # ------------------------------------------------------------------------------------- #
