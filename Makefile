@@ -108,13 +108,13 @@ tc-llvm-debug: check_environment
 # SDK
 .PHONY: sdk-pulp-hrv sdk-pulp sdk-pulp-har sdk-hrv sdk-har
 
-sdk-pulp-hrv: check_environment
-	$(ROOT)/pulp/setup-sdk.sh hero-urania
+sdk-pulp: sdk-arov-clean sdk-arov-cfg sdk-pulp-hrv sdk-arov-libs
 
-sdk-pulp: sdk-clean-libs sdk-pulp-hrv sdk-arov-cfg sdk-arov-libs
+sdk-pulp-hrv: check_environment
+	$(ROOT)/pulp/build-sdk.sh hero-urania
 
 sdk-pulp-har: check_environment
-	$(ROOT)/pulp/setup-sdk.sh hero-arm64
+	$(ROOT)/pulp/build-sdk.sh hero-arm64
 
 sdk-hrv: check_environment br-hrv
 	cd $(CURDIR)/output/br-hrv && $(ROOT)/toolchain/install-sdk.sh
@@ -122,13 +122,13 @@ sdk-hrv: check_environment br-hrv
 sdk-har: check_environment br-har
 	cd $(CURDIR)/output/br-har && $(ROOT)/toolchain/install-sdk.sh
 
-sdk-arov-cfg: sdk-clean-libs
-	$(ROOT)/pulp/setup-arov-cfg.sh hero-urania
+sdk-arov-libs: sdk-arov-clean sdk-arov-cfg
+	$(ROOT)/pulp/build-libs.sh hero-urania
 
-sdk-arov-libs: sdk-clean-libs sdk-arov-cfg
-	$(ROOT)/pulp/build-arov-libs.sh hero-urania
+sdk-arov-cfg: sdk-arov-clean
+	$(ROOT)/pulp/config-sdk.sh hero-urania
 	
-sdk-clean-libs:
+sdk-arov-clean:
 	$(ROOT)/pulp/clean-sdk.sh hero-urania
 
 # Utilities
