@@ -29,9 +29,8 @@ if [ -z "${OV_CFG_DEVICE}" ]; then
     exit 1
 else
     echo "Setup of overlay libraries for '${OV_CFG_DEVICE}'"
+    export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/libs/${OV_CFG_DEVICE}"
 fi
-
-export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/hero-libs/apps/${OV_CFG_DEVICE}"
 
 export PLATFORM=ZYNQMP
 export BOARD=ZYNQMP
