@@ -254,6 +254,12 @@ void hero_l3free(HOST_VOID_PTR a);
  */
 int32_t hero_rt_core_id(void);
 
+/** Get the physical ID of the cluster that executes the function.
+
+  \return  The cluster ID.
+ */
+int32_t hero_rt_cluster_id(void);
+
 /** Start clock counter
  */
 void hero_start_clk_counter(void);

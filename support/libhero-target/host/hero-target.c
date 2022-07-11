@@ -162,6 +162,12 @@ hero_rt_core_id(void)
   return omp_get_thread_num();
 }
 
+int32_t 
+hero_rt_cluster_id(void) 
+{ 
+  return omp_get_thread_num();
+}
+
 // FIXME implement clock counters for host
 void 
 hero_start_clk_counter(void) { 

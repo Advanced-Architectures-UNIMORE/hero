@@ -191,6 +191,7 @@ void hero_l3free(HOST_VOID_PTR a) {
 }
 
 int32_t hero_rt_core_id(void) { return rt_core_id(); }
+int32_t hero_rt_cluster_id(void) { return rt_cluster_id(); }
 
 void hero_start_clk_counter(void) { 
   start_timer(); 
