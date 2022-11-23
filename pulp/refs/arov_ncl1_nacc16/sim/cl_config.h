@@ -6,6 +6,7 @@
 #define __RT_CLUSTER_START 1
 #define PLP_NO_BUILTIN 1
 #define ARCHI_NB_PE 1
+#define ARCHI_NB_CLUSTER 1
 #define __BENCH__ 1
 #define BENCH 1
 #define PULP_RT_VERSION_RELEASE 0
