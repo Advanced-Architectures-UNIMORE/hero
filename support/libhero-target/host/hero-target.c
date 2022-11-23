@@ -109,6 +109,12 @@ hero_dma_wait(hero_dma_job_t id)
   return;
 }
 
+void 
+hero_dma_wait_id(const uint32_t id)
+{
+  return;
+}
+
 DEVICE_PTR
 hero_l1malloc(int32_t size)
 {
@@ -216,6 +222,10 @@ void hero_perf_continue_all(void) {
 
 int64_t hero_perf_read(const hero_perf_event_t event) {
   return -HERO_EINVAL;
+}
+
+int hero_activate_cluster(int cid){
+  return;
 }
 
 #define __hero_atomic_define(op, type) \

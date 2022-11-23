@@ -129,6 +129,7 @@ hero_dma_job_t hero_memcpy_dev2host_async(HOST_VOID_PTR dst,
   \param   job  The DMA job obtained from a previous call to hero_memcpy_*_async().
  */
 void hero_dma_wait(hero_dma_job_t job);
+void hero_dma_wait_id(const uint32_t id);
 
 /** Blocking memcpy from host to device (`host2dev`) or from device to host (`dev2host`).
 
@@ -385,6 +386,12 @@ void hero_perf_continue_all(void);
  *          -HERO_EOVERFLOW if the counter overflowed.
  */
 int64_t hero_perf_read(hero_perf_event_t event);
+
+/** Activate slave cluster.
+ *
+ *  \return Result of cluster fetch.
+ */
+int hero_activate_cluster(int cid);
 
 //!@}
 

@@ -99,6 +99,7 @@ hero_dma_job_t hero_memcpy_host2dev_async(DEVICE_VOID_PTR const dst, const HOST_
   // Launch transfer and obtain ID.
   hero_dma_job_t hero_dma_job;
   hero_dma_job.id = _hero_dma_conf->tf_id;
+
   return hero_dma_job;
 }
 
@@ -166,6 +167,12 @@ void hero_memcpy_dev2host(HOST_VOID_PTR const dst, const DEVICE_VOID_PTR const s
 void hero_dma_wait(const hero_dma_job_t id) {
   uint32_t tf_id = id.id & 0x0fffffff;
   uint32_t stream = (id.id & 0xf0000000) >> 28;
+  _hero_wait_for_tf_completion(stream, tf_id);
+}
+
+void hero_dma_wait_id(const uint32_t id) {
+  uint32_t tf_id = id & 0x0fffffff;
+  uint32_t stream = (id & 0xf0000000) >> 28;
   _hero_wait_for_tf_completion(stream, tf_id);
 }
 
@@ -630,6 +637,10 @@ int64_t hero_perf_read(const hero_perf_event_t event) {
 __read_end:
   __compiler_barrier();
   return retval;
+}
+
+int hero_activate_cluster(int cid){
+  return rt_cluster_fetch_all(cid);
 }
 
 // -------------------------------------------------------------------------- //
