@@ -23,12 +23,12 @@ export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/lib"
 # this can either overlay or not with hero-urania
 hero_root_dir="${THIS_DIR}/.."
 hero_config_file=${hero_root_dir}/local.cfg
-eval OV_CFG_DEVICE=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | tr -d '"')
+export OV_CFG_DEVICE=$(grep OV_CFG_DEV ${hero_config_file} | sed 's/.*=//' | tr -d '"')
 if [ -z "${OV_CFG_DEVICE}" ]; then
     echo "ERROR: please set OV_CFG_DEV in local.cfg file"
     exit 1
 else
-    echo "Setup of overlay libraries for '${OV_CFG_DEVICE}'"
+    echo "Setup of overlay libraries for target '${OV_CFG_DEVICE}'"
     export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/libs/${OV_CFG_DEVICE}"
 fi
 

@@ -42,7 +42,7 @@ INCPATHS += -I$(DEFMK_ROOT) -include hero_64.h
 LIBPATHS ?=
 
 BENCHMARK = $(shell basename `pwd`)
-EXE = $(BENCHMARK)
+EXE ?= $(BENCHMARK)
 SRC = $(CSRCS)
 
 DEPDIR := .deps
@@ -136,15 +136,18 @@ init-target-host:
 ifndef HERO_TARGET_HOST
 	$(error HERO_TARGET_HOST is not set)
 endif
-	ssh -t $(HERO_TARGET_HOST) './sourceme.sh'
-	@echo "HERO_TARGET_HOST: $(HERO_TARGET_HOST)"
-	@echo "HERO_TARGET_PATH_DRIVER: $(HERO_TARGET_PATH_DRIVER)"
-	@echo "HERO_TARGET_PATH_DRIVER: $(HERO_TARGET_PATH_APPS)"
-	@echo "HERO_TARGET_PATH_LIB: $(HERO_TARGET_PATH_LIB)"
+ifndef OV_CFG_DEVICE
+	$(error OV_CFG_DEVICE is not set)
+endif
+	@echo -e "Target host: 		$(HERO_TARGET_HOST)"
+	@echo -e "Target overlay: 	$(OV_CFG_DEVICE)"
+	@echo -e "Apps: 			$(HERO_TARGET_PATH_APPS)"
+	@echo -e "Overlay libs: 		$(HERO_TARGET_PATH_LIB)"
+	@echo -e "Accelerators libs: 	$(HWPE_TARGET_PATH_LIB)"
 	ssh -t $(HERO_TARGET_HOST) '/sbin/rmmod -f pulp'
 	ssh -t $(HERO_TARGET_HOST) '/sbin/insmod $(HERO_TARGET_PATH_DRIVER)/pulp.ko'
 
-prepare:: init-target-host $(EXE)
+prepare::
 ifndef HERO_TARGET_HOST
 	$(error HERO_TARGET_HOST is not set)
 endif
@@ -153,7 +156,7 @@ endif
 
 run:: prepare $(EXE)
 ifeq ($(call ifndef_any_of,HERO_TARGET_HOST HERO_TARGET_PATH_APPS HERO_TARGET_PATH_LIB),)
-	ssh -t $(HERO_TARGET_HOST) 'export LD_LIBRARY_PATH='"'$(HERO_TARGET_PATH_LIB)'"'; cd ${HERO_TARGET_PATH_APPS}; ./$(EXE) $(RUN_ARGS)'
+	ssh -t $(HERO_TARGET_HOST) 'export LD_LIBRARY_PATH='"'$(HERO_TARGET_PATH_LIB)'"':'"'$(HWPE_TARGET_PATH_LIB)'"'; cd ${HERO_TARGET_PATH_APPS}; ./$(EXE) $(RUN_ARGS)'
 else
 	$(error HERO_TARGET_HOST and/or HERO_TARGET_PATH_APPS is not set)
 endif
