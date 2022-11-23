@@ -1,15 +1,15 @@
 # =====================================================================
 # Project:      HERO
-# Title:        zcu102
-# Description:  Compilation flow for ZCU102 Petalinux image for HERO.
+# Title:        zcu102_empty
+# Description:  Compilation flow for ZCU102 Petalinux image for empty 
+#               FPGA projects.
 #
-# $Date:        9.03.2022
+# $Date:        6.10.2022
 # =====================================================================
 #
 # Copyright (C) 2022 University of Modena and Reggio Emilia.
 #
 # Authors: 
-# - Andreas Kurth, ETHZ <akurth@iis.ee.ethz.ch>.
 # - Gianluca Bellocchi, University of Modena and Reggio Emilia.
 #
 # =====================================================================
@@ -44,15 +44,6 @@ cd "$PETALINUX_ROOT"
 # Resolve symlinks.
 cd "$(pwd -P)"
 
-# Obtain overlay instance name from configuration.
-set +e
-ov_cfg_device="$("$HERO_ROOT/util/configfile/get_value" -s "$LOCAL_CFG" "$TARGET_NAME" \
-    | tr -d '"')";
-if test "$?" -ne 0; then
-  >&2 echo "Error: '$1' is not defined in '$LOCAL_CFG'!"
-  exit 1
-fi
-
 # Obtain bitstream path from configuration.
 set +e
 bitstream="$("$HERO_ROOT/util/configfile/get_value" -s "$LOCAL_CFG" "$TARGET_BITSTREAM" \
@@ -71,7 +62,6 @@ BITSTREAM_DIR=$(dirname "$bitstream")
 
 # Print some user information about configuration settings
 echo -e "\nBuilding Petalinux project with the following configuration settings...\n"
-echo -e ">> Overlay instance name: $ov_cfg_device"
 echo -e ">> Bitstream location: $bitstream"
 
 # Initialize Python environment suitable for PetaLinux.
@@ -92,8 +82,9 @@ readonly PETALINUX_VER
 cd $BUILD_DIR
 
 # create project
-PETALINUX_PRJ_NAME=$TARGET_BOARD
-if [ ! -d "$TARGET_BOARD" ]; then
+PETALINUX_PRJ_NAME=$TARGET_BOARD\_empty
+echo -e ">> Petalinux project name: $PETALINUX_PRJ_NAME"
+if [ ! -d "$PETALINUX_PRJ_NAME" ]; then
     $PETALINUX_VER petalinux-create -t project -n "$PETALINUX_PRJ_NAME" --template zynqMP
 fi
 cd "$PETALINUX_PRJ_NAME"
@@ -127,8 +118,11 @@ $PETALINUX_VER petalinux-config --oldconfig --get-hw-description "$BITSTREAM_DIR
 
 echo "
 /include/ \"system-conf.dtsi\"
-/include/ \"${HERO_ROOT}/board/xilzcu102/hero.dtsi\"
 / {
+  chosen {
+        bootargs = \"console=ttyPS0,115200 earlycon clk_ignore_unused\";
+        stdout-path = \"serial0:115200n8\";
+  };
 };
 " > project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi
 
@@ -151,8 +145,6 @@ for pkg in \
 ; do
   rootfs_enable $pkg
 done
-
-# i2c-tools \
 
 create_install_app() {
     $PETALINUX_VER petalinux-create --force -t apps --template install -n ${1} --enable

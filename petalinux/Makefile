@@ -70,6 +70,10 @@ build_petalinux:
 	@$(SCRIPTS_DIR)/$(TARGET_BOARD).sh \
 		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${PETALINUX_ROOT} ${BUILD_DIR}
 
+build_petalinux_empty:
+	@$(SCRIPTS_DIR)/$(TARGET_BOARD)_empty.sh \
+		$(TARGET_BOARD) $(TARGET_NAME) $(TARGET_BITSTREAM) ${PETALINUX_ROOT} ${BUILD_DIR}
+
 clean_output:
 	@rm -rf $(OUT_DIR)/*
 
