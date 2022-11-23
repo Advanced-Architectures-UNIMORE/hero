@@ -102,11 +102,19 @@ is_ariane:
 #endif
 
   /* Stack initialization */
-  la    t0, stack
-  csrw  0x400, t0
-  la    t1, __rt_stack_size
-  csrw  0x404, t1
-  mv    sp, t0
+
+  // Initialize stack in each cluster
+
+  la      t0, stack               // Load stack pointer
+  li      t1, ARCHI_CLUSTER_SIZE  // Load cluster dimension
+  p.mac   t0, t1, a0              // Calculate stack pointer for cluster 
+                                  // Cluster ID is saved in a0
+  la      t2, __rt_stack_size     // Load stack size
+  p.mac   t0, t2, a1              // Calculate stack pointer for core
+                                  // Core ID is saved in a1
+  csrw    0x400, t0               // Write cluster stack pointer in CSR (0x400)
+  csrw    0x404, t2               // Write stack size in CSR (0x404)
+  mv      sp, t0                  // Cluster stack pointer = Stack pointer
 
 #if defined(__RT_USE_LIBC)
   la      a0, __libc_fini_array   # Register global termination functions
