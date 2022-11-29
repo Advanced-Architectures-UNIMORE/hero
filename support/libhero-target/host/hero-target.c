@@ -244,3 +244,32 @@ __hero_atomic_define(max,  int32_t)
 __hero_atomic_define(maxu, uint32_t)
 __hero_atomic_define(min,  int32_t)
 __hero_atomic_define(minu, uint32_t)
+
+
+
+
+
+/* ===================================================================== */
+
+/* ========================= */
+/*  ONLY FOR TEMPORARY USE!! */
+/* ========================= */
+
+int hero_perf_init_bare(const int cluster_id, const int core_id, DEVICE_VOID_PTR base_addr_alloc) {
+  return 0;
+}
+
+int hero_perf_alloc_bare(const hero_perf_event_t event) {
+  return 0;
+}
+
+int hero_perf_dealloc_bare(const hero_perf_event_t event) {
+  return 0;
+}
+
+hero_dma_job_t hero_memcpy_dev2host_async_no_trigger(HOST_VOID_PTR const dst, const DEVICE_VOID_PTR const src,
+                                          const uint32_t size) {
+  return;
+}
+
+/* ===================================================================== */

@@ -423,5 +423,22 @@ uint32_t hero_atomic_maxu  (DEVICE_PTR_CONST ptr, const uint32_t val);
 int32_t  hero_atomic_min   (DEVICE_PTR_CONST ptr, const int32_t  val);
 uint32_t hero_atomic_minu  (DEVICE_PTR_CONST ptr, const uint32_t val);
 
+
+/* ===================================================================== */
+
+/* ========================= */
+/*  ONLY FOR TEMPORARY USE!! */
+/* ========================= */
+
+// Performance counters
+int hero_perf_init_bare(const int cluster_id, const int core_id, DEVICE_VOID_PTR base_addr_alloc);
+int hero_perf_alloc_bare(const hero_perf_event_t event);
+int hero_perf_dealloc_bare(const hero_perf_event_t event);
+
+// DMA
+hero_dma_job_t hero_memcpy_dev2host_async_no_trigger(HOST_VOID_PTR const dst, const DEVICE_VOID_PTR const src, const uint32_t size);
+
+/* ===================================================================== */
+
 //!@}
 #endif

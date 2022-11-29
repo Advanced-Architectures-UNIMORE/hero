@@ -665,3 +665,110 @@ __hero_atomic_define(max, int32_t)
 __hero_atomic_define(maxu, uint32_t)
 __hero_atomic_define(min, int32_t)
 __hero_atomic_define(minu, uint32_t)
+
+
+
+
+
+/* ===================================================================== */
+
+/* ========================= */
+/*  ONLY FOR TEMPORARY USE!! */
+/* ========================= */
+
+int hero_perf_init_bare(const int cluster_id, const int core_id, DEVICE_VOID_PTR base_addr_alloc) {
+  // Return if already initialized.
+  if (hero_perf[hero_rt_core_id()] != NULL) return -HERO_EALREADY;
+
+  // Allocate memory for tracking state of performance counters.
+  // hero_perf[hero_rt_core_id()] = hero_l1malloc(sizeof(hero_perf_t));
+
+  hero_perf[hero_rt_core_id()] = (DEVICE_VOID_PTR)base_addr_alloc + core_id * sizeof(hero_perf_t);
+
+  if (hero_perf[hero_rt_core_id()] == NULL) return -HERO_ENOMEM;
+
+  // Initialize state struct.
+  *hero_perf[hero_rt_core_id()] = (hero_perf_t){
+    .mcountinhibit = ~0 // mark all counters as deallocated
+  };
+
+  // Clear counter event assignments.
+  for (unsigned i = 3; i < 3 + 2; i++) set_mhpmevent(i, 0);
+
+  // Pause all counters.
+  hero_perf_pause_all();
+
+  return 0;
+}
+
+int hero_perf_alloc_bare(const hero_perf_event_t event) {
+  // Return if event not implemented.
+  if (!event_implemented(event)) return -HERO_ENODEV;
+
+  // Return if the event is already assigned to a hardware counter.
+  if (event_counter(event) >= 0) return -HERO_EALREADY;
+
+  // Determine index of counter to be allocated.
+  uint8_t counter_idx;
+  if (event == hero_perf_event_cycle) {
+    counter_idx = 0; // cycles are always counted by counter 0
+  } else if (event == hero_perf_event_instr_retired) {
+    counter_idx = 2; // instructions retired are always counted by counter 2
+  } else {
+    const uint32_t free_mask = (hero_perf[hero_rt_core_id()]->mcountinhibit) >> 3;
+    uint8_t first_free_counter;
+    asm volatile("p.ff1 %0, %1" : "=r"(first_free_counter) : "r"(free_mask));
+    if (first_free_counter >= 2) { // only two programmable counters implemented
+      return -HERO_EBUSY;
+    }
+    counter_idx = first_free_counter + 3;
+  }
+
+  // Allocate counter in library.
+  hero_perf[hero_rt_core_id()]->mcountinhibit &= inhibit_enable_mask(counter_idx);
+
+  // Assign event to hardware counter.
+  set_mhpmevent(counter_idx, event_num(event));
+
+  // Inhibit and reset hardware counter.
+  counter_inhibit(counter_idx);
+  counter_reset(counter_idx);
+
+  return 0;
+}
+
+int hero_perf_dealloc_bare(const hero_perf_event_t event) {
+  // Determine counter for event.
+  const int8_t counter = event_counter(event);
+
+  // Return if no counter allocated for event.
+  if (counter < 0) return -HERO_EALREADY;
+
+  // Inhibit hardware counter.
+  counter_inhibit(counter);
+
+  // Unassign event from hardware counter.
+  set_mhpmevent(counter, 0);
+
+  // Deallocate counter in library.
+  hero_perf[hero_rt_core_id()]->mcountinhibit |= inhibit_disable_mask(counter);
+
+  return 0;
+}
+
+hero_dma_job_t hero_memcpy_dev2host_async_no_trigger(HOST_VOID_PTR const dst, const DEVICE_VOID_PTR const src,
+                                          const uint32_t size) {
+  // Configure the DMA engine.
+  _hero_dma_conf->src_addr_low = (uint32_t)src;
+  _hero_dma_conf->src_addr_high = 0;
+  _hero_dma_conf->dst_addr_low = (uint32_t)dst;
+  _hero_dma_conf->dst_addr_high = (uint32_t)((uint64_t)dst >> 32);
+  _hero_dma_conf->num_bytes = size;
+
+  // Launch transfer and obtain ID.
+  hero_dma_job_t hero_dma_job;
+  
+  return hero_dma_job;
+}
+
+/* ===================================================================== */
