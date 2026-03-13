@@ -30,6 +30,10 @@ if [ -z "${HERO_INSTALL}" ]; then
   echo "Fatal error: The 'HERO_INSTALL' environment variable is not defined!"
   exit 1
 fi
+if [ -z "${PULP_RISCV_GCC_TOOLCHAIN}" ]; then
+  echo "Fatal error: The 'PULP_RISCV_GCC_TOOLCHAIN' environment variable is not defined!"
+  exit 1
+fi
 if [ "$#" -ne 1 ]; then
     echo 'Fatal: expects a single argument'
     exit 1
