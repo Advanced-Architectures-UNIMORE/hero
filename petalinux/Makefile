@@ -1,7 +1,7 @@
 # =====================================================================
 # Project:      HERO
 # Title:        Makefile
-# Description:  Define operations compliant with compilation of Petalinux 
+# Description:  Define operations compliant with compilation of Petalinux
 #				image for HERO.
 #
 # $Date:        9.03.2022
@@ -15,17 +15,16 @@
 
 PETALINUX_ROOT 		:= $(patsubst %/,%, $(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
-# user parameters
 TARGET_BOARD 		:= zcu102
+TARGET_VER 			:= 2019_2
 TARGET_NAME			:= OV_CFG_DEV
 TARGET_BITSTREAM 	:= BR2_HERO_BITSTREAM
+TARGET_XSA 			:= BR2_HERO_XSA
 
-# project
-BUILD_DIR		:= ${PETALINUX_ROOT}
+BUILD_DIR			:= ${PETALINUX_ROOT}
 
-# directories
-SCRIPTS_DIR		:= $(PETALINUX_ROOT)/scripts
-OUT_DIR			:= $(PETALINUX_ROOT)/output
+SCRIPTS_DIR			:= $(PETALINUX_ROOT)/scripts
+OUT_DIR				:= $(PETALINUX_ROOT)/output
 
 .PHONY: clean
 
@@ -35,15 +34,13 @@ OUT_DIR			:= $(PETALINUX_ROOT)/output
 #  BOARD  #
 # ------- #
 
-# Procedure to offline/online update of board projects:
+# 1) update_bitstream (off-board) ~ retrieve new bitstream and re-compile project outputs.
 #
-# 1) update_bitstream (offline) ~ retrieve new bitstream and re-compile project outputs.
+# 2) update_output (off-board) ~ collect project binaries, divided per project.
 #
-# 2) update_output (offline) ~ collect project binaries, divided per project.
+# 3) update_boardenv (on-board) ~ copy new images to board.
 #
-# 3) update_boardenv (online) ~ copy new images to board.
-#
-# 4) reboot_zcu102 (online) ~ reboot board.
+# 4) reboot_zcu102 (on-board) ~ reboot board.
 
 reboot_zcu102:
 	@$(SCRIPTS_DIR)/reboot_zcu102.sh

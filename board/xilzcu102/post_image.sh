@@ -1,15 +1,15 @@
 # =====================================================================
 # Project:      HERO
 # Title:        post_image
-# Description:  Script invoked during the build of the Linux environment 
+# Description:  Script invoked during the build of the Linux environment
 #               (kernel and the base root filesystem). The recipe for the
-#               Xilinx ZCU102 is "make br-har-exilzcu102". This script 
+#               Xilinx ZCU102 is "make br-har-exilzcu102". This script
 #               invokes Petalinux to build the Petalinux components for HERO.
 #
 # $Date:        22.03.2022
 # =====================================================================
 #
-# Authors: 
+# Authors:
 # - Andreas Kurth, ETHZ <akurth@iis.ee.ethz.ch>.
 # - Gianluca Bellocchi, University of Modena and Reggio Emilia.
 #
@@ -26,10 +26,10 @@
 cd ${BR2_EXTERNAL_HERO_PATH}/petalinux/
 
 # Build the petalinux zcu102 config
-# Note: The invoked Mk recipes feed the scripts 
-# with different variables that can be modified 
+# Note: The invoked Mk recipes feed the scripts
+# with different variables that can be modified
 # by the user in case a different bitstream, project
-# directpry, etc. has to be used. 
+# directory, etc. has to be used.
 make build_petalinux
 
 # Update local outputs to be copied in buildroot
