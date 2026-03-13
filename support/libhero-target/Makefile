@@ -17,5 +17,8 @@ all: header build install
 install:
 	@$(foreach dir,$(dirs), cd $(PWD)/$(dir) &&  make install;)
 
+install_pulp:
+	cd pulp && make install;
+	
 clean:
 	@$(foreach dir,$(dirs), cd $(PWD)/$(dir) &&  make clean;)
