@@ -13,11 +13,9 @@ if [[ -z "${HERO_TARGET_HOST}" ]]; then
 else
   export HERO_TARGET_PATH="/home/root/workspace_gbellocchi" # personalize this with your own board working space
 fi
-export HERO_TARGET_PATH_APPS="${HERO_TARGET_PATH}/apps"
-export HERO_TARGET_PATH_LIB="${HERO_BOARD_LIB_PATH}"
-export HERO_TARGET_PATH_DRIVER="${HERO_BOARD_DRIVER_PATH}"
-
-export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/lib"
+export HERO_TARGET_PATH_APPS="${HERO_TARGET_PATH}/apps" # Application executables
+export HERO_TARGET_PATH_LIB="/run/media/mmcblk0p2/usr/lib" # HERO libs
+export HERO_TARGET_PATH_DRIVER="${HERO_BOARD_DRIVER_PATH}" # HERO driver
 
 # read target overlay device (set in local.cfg in HERO root directory)
 # this can either overlay or not with hero-urania
@@ -29,7 +27,7 @@ if [ -z "${OV_CFG_DEVICE}" ]; then
     exit 1
 else
     echo "Setup of overlay libraries for target '${OV_CFG_DEVICE}'"
-    export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/libs/${OV_CFG_DEVICE}"
+    export HWPE_TARGET_PATH_LIB="${HERO_TARGET_PATH}/libs/${OV_CFG_DEVICE}" # Accelerator libs
 fi
 
 export PLATFORM=ZYNQMP
